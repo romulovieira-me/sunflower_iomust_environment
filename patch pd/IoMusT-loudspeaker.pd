@@ -1,0 +1,5 @@
+#N canvas 828 276 450 300 10;
+#X obj 51 79 ggee/streamin~ 3000;
+#X obj 51 102 dac~;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
