@@ -1,0 +1,16 @@
+#N canvas 446 264 1143 606 10;
+#X msg 247 100 disconnect;
+#X floatatom 247 227 0 0 0 0 - - -;
+#X floatatom 264 151 0 0 0 0 - - -;
+#X obj 364 126 adc~;
+#X obj 247 202 ggee/streamout~;
+#X msg 247 30 connect 192.168.0.10 3000;
+#X text 128 100 encerra conexão ->;
+#X text 87 201 envia audio pela rede -->;
+#X text 5 28 envia áudio para o endereço indicado ->;
+#X text 395 125 <-- entrada audio;
+#X connect 0 0 4 0;
+#X connect 2 0 4 0;
+#X connect 3 0 4 0;
+#X connect 4 0 1 0;
+#X connect 5 0 4 0;

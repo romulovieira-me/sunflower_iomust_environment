@@ -1,0 +1,18 @@
+#N canvas 2399 177 737 433 10;
+#X obj 83 30 ggee/streamin~ 3000;
+#X obj 84 99 dac~;
+#X obj 24 269 writesf~ 2;
+#X msg 211 219 stop;
+#X text 316 166 <-- dá nome ao arquivo de áudio e inicia gravação
+;
+#X text 92 269 <-- grava áudio no mesmo diretório do arquivo principal
+;
+#X text 205 30 <-- recebe áudio pela porta 3000 (loudspeaker);
+#X text 115 99 <-- saída de áudio;
+#X text 246 219 <-- para a gravação de áudio;
+#X msg 130 168 open nome_arquivo.wav \, start;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 0 0 2 0;
+#X connect 3 0 2 0;
+#X connect 9 0 2 0;
