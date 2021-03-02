@@ -1,0 +1,33 @@
+#N canvas 388 556 1019 395 10;
+#X msg 289 221 disconnect;
+#X floatatom 289 348 0 0 0 0 - - -;
+#X floatatom 306 272 0 0 0 0 - - -;
+#X obj 289 323 ggee/streamout~;
+#X obj 458 52 ggee/streamin~ 3000;
+#X obj 497 226 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 458 263 *~;
+#X obj 494 134 osc/unpackOSC;
+#X obj 494 111 mrpeach/net/udpreceive 40000;
+#X obj 494 182 osc/routeOSC /volume;
+#X msg 289 199 connect 192.168.0.10 3000;
+#X text 583 51 <-- recebe dados da rede na porta indicada;
+#X text 391 324 <-- envia dados para a rede;
+#X text 131 273 indica estado da conexão -->;
+#X text 13 196 conecta a rede com IP e portas indicados -->;
+#X text 165 222 encerra conexão -->;
+#X text 482 264 <-- saída de áudio;
+#X text 631 224 <-- vslider de volume;
+#X text 668 113 <-- porta de rede OSC;
+#X text 625 176 <-- envia controle OSC pela rede (permite controlar
+o slider de volume a partir de um botão físico ou algo similar;
+#X connect 0 0 3 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 6 0;
+#X connect 5 0 6 1;
+#X connect 6 0 3 0;
+#X connect 7 0 9 0;
+#X connect 8 0 7 0;
+#X connect 9 0 5 0;
+#X connect 10 0 3 0;

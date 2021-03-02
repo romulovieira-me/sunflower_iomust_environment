@@ -1,17 +1,23 @@
-#N canvas 293 200 956 646 10;
-#X msg 132 108 disconnect;
-#X floatatom 132 235 0 0 0 0 - - -;
-#X floatatom 149 159 0 0 0 0 - - -;
-#X obj 132 210 ggee/streamout~;
-#X obj 249 134 osc~ 440;
-#X obj 283 88 mtof;
-#X msg 280 24 60;
-#X floatatom 350 139 5 0 0 0 - - -, f 5;
-#X text 329 23 <- Dó central;
-#X obj 211 168 *~;
-#X obj 283 168 tgl 15 0 empty empty Liga_/_Desliga 17 7 0 10 -262144
+#N canvas 0 56 1920 985 10;
+#X msg 464 187 disconnect;
+#X floatatom 464 314 0 0 0 0 - - -;
+#X floatatom 481 238 0 0 0 0 - - -;
+#X obj 464 289 ggee/streamout~;
+#X obj 581 213 osc~ 440;
+#X obj 612 151 mtof;
+#X msg 612 103 60;
+#X floatatom 674 188 5 0 0 0 - - -, f 5;
+#X text 635 102 <- Dó central;
+#X obj 543 247 *~;
+#X obj 615 247 tgl 15 0 empty empty Liga_/_Desliga 17 7 0 10 -262144
 -1 -1 0 1;
-#X msg 100 67 connect 192.168.0.10 3000;
+#X msg 432 146 connect 192.168.0.10 3000;
+#X text 199 145 conecta a este IP \, com esta porta -->;
+#X text 340 187 encerra conexão -->;
+#X text 286 314 indica estado da conexão -->;
+#X text 296 287 envia dados para a rede -->;
+#X text 634 214 <-- frequência tocada;
+#X text 648 148 <-- muda o valor da frequência para Hertz;
 #X connect 0 0 3 0;
 #X connect 2 0 3 0;
 #X connect 3 0 1 0;

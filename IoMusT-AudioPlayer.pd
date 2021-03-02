@@ -1,90 +1,113 @@
 #N canvas 0 57 1920 985 10;
-#X obj 323 837 *~;
-#X obj 381 837 *~;
-#X obj 815 706 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -204786
--1 -1 300 1;
-#X text 847 734 slider de volume;
+#X obj 464 851 *~;
+#X obj 522 851 *~;
+#X obj 956 720 vsl 15 128 0 127 0 0 empty empty empty 0 -9 0 10 -204786
+-1 -1 1100 1;
+#X text 988 748 slider de volume;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array channelL 521216 float 0;
 #X coords 0 1 521215 -1 200 140 1;
-#X restore 1128 179 graph;
+#X restore 1269 193 graph;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array channelR 521216 float 0;
 #X coords 0 1 521215 -1 200 140 1;
-#X restore 1132 405 graph;
-#X text 1329 238 saída de áudio do lado esquerdo;
-#X text 1335 466 saída de áudio do lado direito;
-#X obj 323 106 openpanel;
-#X text 389 107 comando que abre diretório para selecionar arquivo
+#X restore 1273 419 graph;
+#X text 1470 252 saída de áudio do lado esquerdo;
+#X text 1476 480 saída de áudio do lado direito;
+#X obj 464 120 openpanel;
+#X text 530 121 comando que abre diretório para selecionar arquivo
 de áudio;
-#X obj 323 67 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+#X obj 464 81 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X text 343 65 dispara o openpanel;
-#X msg 323 146 read -resize \$1 channelL channelR;
-#X obj 323 186 soundfiler;
-#X floatatom 356 219 12 0 0 0 - - -, f 12;
-#X obj 323 279 expr 44100 / $f1;
-#X text 428 280 divide o aúdio em várias amostras menores(sample
+#X text 484 79 dispara o openpanel;
+#X msg 464 160 read -resize \$1 channelL channelR;
+#X obj 464 200 soundfiler;
+#X floatatom 497 233 12 0 0 0 - - -, f 12;
+#X obj 464 293 expr 44100 / $f1;
+#X text 569 294 divide o aúdio em várias amostras menores(sample
 rate);
-#X obj 356 254 s sampleSize;
-#X floatatom 346 323 12 0 0 0 - - -, f 12;
-#X obj 323 406 phasor~;
-#X obj 324 510 *~;
-#X obj 390 481 r sampleSize;
-#X obj 323 722 tabread4~ channelL;
-#X obj 354 769 tabread4~ channelR;
-#X text 429 310 leitura de amostras por segundo no phasor (varia de
+#X obj 497 268 s sampleSize;
+#X floatatom 487 337 12 0 0 0 - - -, f 12;
+#X obj 464 420 phasor~;
+#X obj 465 524 *~;
+#X obj 531 495 r sampleSize;
+#X obj 464 736 tabread4~ channelL;
+#X obj 495 783 tabread4~ channelR;
+#X text 570 324 leitura de amostras por segundo no phasor (varia de
 áudio para áudio);
-#X text 348 510 recebe a saída do phasor (lê todas as amostras de
+#X text 489 524 recebe a saída do phasor (lê todas as amostras de
 áudio);
-#X obj 398 602 snapshot~;
-#X text 459 601 indica a posição da amostra de áudio no tempo;
-#X obj 398 566 metro 50;
-#X obj 398 534 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 539 616 snapshot~;
+#X text 600 615 indica a posição da amostra de áudio no tempo;
+#X obj 539 580 metro 50;
+#X obj 539 548 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X text 413 533 liga o metro;
-#X floatatom 398 631 12 0 0 0 - - -, f 12;
-#X obj 398 659 /;
-#X obj 450 660 r sampleSize;
-#X floatatom 398 697 5 0 0 0 - - -, f 5;
-#X obj 1139 580 hsl 195 15 0 1 0 0 empty empty empty -2 -8 0 10 -232576
+#X text 554 547 liga o metro;
+#X floatatom 539 645 12 0 0 0 - - -, f 12;
+#X obj 539 673 /;
+#X obj 591 674 r sampleSize;
+#X floatatom 539 711 5 0 0 0 - - -, f 5;
+#X obj 1281 594 hsl 195 15 0 1 0 0 empty empty empty -2 -8 0 10 -232576
 -1 -1 0 1;
-#X obj 517 365 hsl 128 15 -1 1 0 0 empty empty empty -2 -8 0 10 -204800
+#X obj 658 379 hsl 128 15 -1 1 0 0 empty empty empty -2 -8 0 10 -204800
 -1 -1 6887 1;
-#X floatatom 514 389 5 0 0 0 - - -, f 5;
-#X msg 515 417 0;
-#X msg 515 446 0.5;
-#X text 541 446 toca a amostra a partir do meio;
-#X msg 124 364 0;
-#X text 86 364 PAUSE;
-#X msg 118 428 1;
-#X text 78 460 Aumenta velocidade;
-#X obj 117 307 t b b;
-#X obj 117 269 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X floatatom 655 403 5 0 0 0 - - -, f 5;
+#X msg 656 431 0;
+#X msg 656 460 0.5;
+#X text 682 460 toca a amostra a partir do meio;
+#X msg 265 378 0;
+#X text 227 378 PAUSE;
+#X msg 259 442 1;
+#X text 219 474 Aumenta velocidade;
+#X obj 258 321 t b b;
+#X obj 258 283 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X text 576 338 controla velocidade / PLAY (resultado variável da
+#X text 717 352 controla velocidade / PLAY (resultado variável da
 expressão);
-#X text 455 566 tem que estar ligado para o hslider se movimentar;
-#X text 544 417 RESTART na amostra de áudio;
-#X text 1342 578 barra que mostra a posição da amostra de áudio
+#X text 596 580 tem que estar ligado para o hslider se movimentar;
+#X text 685 431 RESTART na amostra de áudio;
+#X text 1483 592 barra que mostra a posição da amostra de áudio
 (track timer);
-#X text 1 223 primeiro pausa \, depois manda para a fase inicial;
-#X text 533 139 redimensiona o array para que comporte todas as amostras
+#X text 142 237 primeiro pausa \, depois manda para a fase inicial
+;
+#X text 674 153 redimensiona o array para que comporte todas as amostras
 de áudio;
-#X text 389 185 abre o arquivo de áudio;
-#X text 471 767 dá o comando para tocar;
-#X text 437 721 dá o comando para tocar;
-#X text 437 721 dá o comando para tocar;
-#X msg 514 339 0.0846098;
-#X msg 1094 772 connect 192.168.0.10 3000;
-#X msg 1111 812 disconnect;
-#X obj 1094 856 ggee/streamout~;
-#X floatatom 1094 909 5 0 0 0 - - -, f 5;
-#X text 1253 771 envia mensagem para o endereço em questão;
-#X text 1198 858 comando que envia dados para a rede;
-#X text 1126 910 indica estado da conexão;
-#X text 527 865 envia os dados sonoros para a rede. peça-chave no
+#X text 530 199 abre o arquivo de áudio;
+#X text 612 781 dá o comando para tocar;
+#X text 578 735 dá o comando para tocar;
+#X text 578 735 dá o comando para tocar;
+#X msg 655 353 0.0846098;
+#X msg 1235 786 connect 192.168.0.10 3000;
+#X msg 1252 826 disconnect;
+#X obj 1235 870 ggee/streamout~;
+#X floatatom 1235 923 5 0 0 0 - - -, f 5;
+#X text 1394 785 envia mensagem para o endereço em questão;
+#X text 1339 872 comando que envia dados para a rede;
+#X text 1267 924 indica estado da conexão;
+#X text 668 879 envia os dados sonoros para a rede. peça-chave no
 código aqui exibido;
+#X obj 1341 40 osc/unpackOSC;
+#X obj 1341 117 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 1341 12 mrpeach/net/udpreceive 40002;
+#X obj 1341 88 osc/routeOSC /audioplayer;
+#X text 1364 115 <-- recebe ordem do controlador via rede;
+#X text 1171 11 abre porta para conexão OSC;
+#X text 1218 40 converte OSC --> PD;
+#X text 1165 86 envia informação para toggle;
+#X obj 199 638 osc/unpackOSC;
+#X obj 199 686 osc/routeOSC /audioplayer;
+#X text 23 684 comment;
+#X text 76 638 comment;
+#X text 29 609 comment;
+#X obj 98 747 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 199 610 mrpeach/net/udpreceive 40003;
+#X text 120 746 <-- recebe comando de pause via rede;
+#X obj 1105 671 osc/unpackOSC;
+#X obj 1105 648 mrpeach/net/udpreceive 40000;
+#X obj 1105 719 osc/routeOSC /volume;
+#X text 1281 647 <-- permite controle do volume via-rede;
 #X connect 0 0 60 0;
 #X connect 1 0 60 0;
 #X connect 2 0 1 1;
@@ -125,3 +148,14 @@ código aqui exibido;
 #X connect 58 0 60 0;
 #X connect 59 0 60 0;
 #X connect 60 0 61 0;
+#X connect 66 0 69 0;
+#X connect 67 0 57 0;
+#X connect 68 0 66 0;
+#X connect 69 0 67 0;
+#X connect 74 0 75 0;
+#X connect 75 0 79 0;
+#X connect 79 0 46 0;
+#X connect 80 0 74 0;
+#X connect 82 0 84 0;
+#X connect 83 0 82 0;
+#X connect 84 0 2 0;

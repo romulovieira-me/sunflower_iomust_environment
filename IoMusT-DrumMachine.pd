@@ -1,8 +1,8 @@
 #N canvas 0 57 1920 985 10;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-drumpattern 16 float 3;
-#A 0 4.32857 4.92857 3.17143 0.428571 5.61429 0.642857 1.24286 3.51429
-5.48572 3.98572 3.81429 4.02857 4.28572 4.45714 2.14286 3.42857;
+#A 0 5.1 3.72857 2.57143 1.24286 0.814284 3.12857 4.75714 3.47143 4.24286
+1.5 3 3.38571 4.41429 3.6 1.97143 4.67143;
 #X coords 0 6 16 0 200 140 1 0 0;
 #X restore 1003 143 graph;
 #X text 1215 183 padrão de batidas (ctrl + click para alterar);
@@ -13,7 +13,7 @@
 #X msg 1019 308 0 2 3 4 5 6 0 1 2 3 4 5 6 0 1 2;
 #X text 1211 308 envia os valores da mensagem para a drum pattern (editável)
 ;
-#N canvas 434 229 450 468 counter 1;
+#N canvas 434 230 450 468 counter 0;
 #X obj 62 44 inlet;
 #X obj 121 43 inlet;
 #X obj 62 85 tgl 15 0 empty empty empty 17 7 0 10 -204786 -1 -1 0 1
@@ -48,7 +48,7 @@
 #X floatatom 376 137 5 0 0 0 - - -, f 5;
 #X text 411 138 BPM;
 #X obj 319 213 hradio 15 1 0 16 empty empty empty 0 -8 0 10 -203904
--1 -1 4;
+-1 -1 7;
 #X obj 319 288 array get \$0-drumpattern;
 #X text 468 287 envia o drum pattern para o hradio;
 #X msg 389 244 1;
@@ -61,7 +61,7 @@ int;
 #X text 351 440 resultado da conversão;
 #X obj 319 489 select 0 1 2 3 4 5 6;
 #X text 444 489 define comportamento para os elementos;
-#N canvas 345 256 550 366 kick 1;
+#N canvas 345 257 550 366 kick 0;
 #X obj 50 38 inlet;
 #X obj 132 39 inlet;
 #X obj 50 79 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
@@ -86,7 +86,7 @@ int;
 #X connect 8 0 9 1;
 #X connect 9 0 10 0;
 #X restore 319 563 pd kick;
-#N canvas 627 369 692 446 snare 1;
+#N canvas 627 370 692 446 snare 0;
 #X obj 356 49 inlet;
 #X obj 295 50 inlet;
 #X obj 295 95 f;
@@ -114,7 +114,7 @@ int;
 #X connect 11 0 12 0;
 #X connect 12 0 6 0;
 #X restore 380 564 pd snare;
-#N canvas 639 328 714 502 hats 1;
+#N canvas 639 329 714 502 hats 0;
 #X obj 260 62 inlet;
 #X obj 356 63 inlet;
 #X obj 260 101 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
@@ -176,6 +176,14 @@ int;
 #X text 451 817 envia áudio pela rede;
 #X text 535 754 disconecta da porta;
 #X text 624 709 inicia conexão via rede \, pela porta 3000;
+#X obj 319 53 osc/unpackOSC;
+#X obj 319 21 mrpeach/net/udpreceive 40000;
+#X obj 319 91 osc/routeOSC /drum;
+#X text 500 20 <-- recebe dados OSC \, via protocolo UDP pela porta
+indica;
+#X text 408 53 <-- converte para mensagem PD;
+#X text 433 91 <-- recebe dados OSC na variável drum;
+#X text 202 135 ON/OFF via OSC -->;
 #X connect 4 0 3 0;
 #X connect 6 0 10 0;
 #X connect 7 0 6 0;
@@ -215,3 +223,6 @@ int;
 #X connect 44 0 45 0;
 #X connect 45 0 47 0;
 #X connect 46 0 45 0;
+#X connect 52 0 54 0;
+#X connect 53 0 52 0;
+#X connect 54 0 7 0;
