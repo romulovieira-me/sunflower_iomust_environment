@@ -1,0 +1,72 @@
+#N canvas 1920 56 1366 711 10;
+#X text 104 20 VOLUME;
+#X obj 697 209 osc/packOSC;
+#X obj 631 252 mrpeach/net/udpsend;
+#X msg 640 93 disconnect;
+#X text 798 57 <-- conecta IP e porta;
+#X text 707 92 <-- encerra conexão;
+#X text 772 209 <-- converte uma mensagem PD para uma mensagem em OSC
+;
+#X text 827 179 <-- prepara a mensagem OSC;
+#X obj 697 122 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X text 713 120 <-- botão que liga/desliga bateria via rede \, por
+meio do OSC;
+#X text 758 250;
+#X text 813 23 ON/OFF;
+#X msg 697 180 send /on_off_pitch \$1;
+#X msg 629 56 connect 192.168.0.10 40051;
+#X text 208 383 FREQUENCE;
+#X text 64 -4;
+#X obj 109 110 hsl 128 15 0 127 0 0 empty empty empty 0 -9 0 10 -4034
+-1 -1 12700 1;
+#X obj 106 196 osc/packOSC;
+#X obj 40 239 mrpeach/net/udpsend;
+#X msg 49 80 disconnect;
+#X text 207 44 <-- conecta IP e porta;
+#X text 116 79 <-- encerra conexão;
+#X text 244 108 <-- vslider de volume;
+#X text 181 196 <-- converte uma mensagem PD para uma mensagem em OSC
+;
+#X text 243 166 <-- prepara a mensagem OSC;
+#X text 167 237 <-- chama a biblioteca mrpeach \, que cria uma infraestrutura
+de rede para transporte de mensagem OSC na mesma. Ela é enviada sob
+o protocolo UDP \, de forma unidirecional;
+#X floatatom 127 138 5 0 0 0 - - -, f 5;
+#X text 160 137 <-- exibe o volume \, que vai de 0 a 127;
+#X msg 38 43 connect 192.168.0.10 40050;
+#X msg 106 167 send /volume_pitch \$1;
+#X obj 122 482 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -4032
+-1 -1 6300 1;
+#X obj 119 568 osc/packOSC;
+#X obj 53 611 mrpeach/net/udpsend;
+#X msg 62 452 disconnect;
+#X text 215 413 <-- conecta IP e porta;
+#X text 129 451 <-- encerra conexão;
+#X text 194 568 <-- converte uma mensagem PD para uma mensagem em OSC
+;
+#X text 237 538 <-- prepara a mensagem OSC;
+#X msg 51 415 connect 192.168.0.10 40052;
+#X msg 119 539 send /freq_pitch \$1;
+#X text 257 480 <-- vslider de frequência;
+#X obj 143 510 mtof;
+#X floatatom 209 509 5 0 0 0 - - -, f 5;
+#X text 247 511 <-- valor em Hertz;
+#X connect 1 0 2 0;
+#X connect 3 0 2 0;
+#X connect 8 0 12 0;
+#X connect 12 0 1 0;
+#X connect 13 0 2 0;
+#X connect 16 0 29 0;
+#X connect 16 0 26 0;
+#X connect 17 0 18 0;
+#X connect 19 0 18 0;
+#X connect 28 0 18 0;
+#X connect 29 0 17 0;
+#X connect 30 0 39 0;
+#X connect 30 0 41 0;
+#X connect 31 0 32 0;
+#X connect 33 0 32 0;
+#X connect 38 0 32 0;
+#X connect 39 0 31 0;
+#X connect 41 0 42 0;

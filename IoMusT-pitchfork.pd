@@ -1,0 +1,66 @@
+#N canvas 0 56 1920 985 10;
+#X msg 190 226 disconnect;
+#X floatatom 316 337 0 0 0 0 - - -;
+#X floatatom 333 261 0 0 0 0 - - -;
+#X obj 316 312 ggee/streamout~;
+#X obj 1014 241 mtof;
+#X floatatom 1073 292 5 0 0 0 - - -, f 5;
+#X obj 395 270 *~;
+#X obj 953 548 tgl 15 0 empty empty Liga_/_Desliga 17 7 0 10 -4034
+-1 -258113 0 1;
+#X msg 316 169 connect 192.168.0.10 3000;
+#X text 83 168 conecta a este IP \, com esta porta -->;
+#X text 66 226 encerra conexão -->;
+#X text 138 337 indica estado da conexão -->;
+#X text 148 310 envia dados para a rede -->;
+#X text 1031 329 <-- frequência tocada;
+#X text 1050 238 <-- muda o valor da frequência para Hertz;
+#X obj 319 821 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 12700 1;
+#X text 456 818 <--volume;
+#X obj 1070 204 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -4032
+-1 -1 6300 1;
+#X text 1204 203 <-- altera nota (frequência);
+#X msg 1113 160 69;
+#X obj 978 328 osc~ 440;
+#X text 1028 158 nota MIDI -->;
+#X text 1136 159 <- Lá 440 (dó central é 63);
+#X text 1112 293 <-- valor em Hz;
+#X obj 316 710 osc/unpackOSC;
+#X text 490 689 <-- porta de rede OSC;
+#X text 482 751 <-- envia controle OSC pela rede (permite controlar
+o slider de volume a partir de um botão físico ou algo similar;
+#X obj 316 687 mrpeach/net/udpreceive 40050;
+#X obj 949 440 osc/unpackOSC;
+#X text 1130 407 <-- recebe dados OSC \, via protocolo UDP pela porta
+indica;
+#X text 1038 440 <-- converte para mensagem PD;
+#X text 1111 477 <-- recebe dados OSC na variável drum;
+#X obj 949 408 mrpeach/net/udpreceive 40051;
+#X obj 316 758 osc/routeOSC /volume_pitch;
+#X obj 949 478 osc/routeOSC /on_off_pitch;
+#X obj 786 90 osc/unpackOSC;
+#X text 960 69 <-- porta de rede OSC;
+#X obj 786 138 osc/routeOSC /freq_pitch;
+#X obj 786 67 mrpeach/net/udpreceive 40052;
+#X connect 0 0 3 0;
+#X connect 2 0 3 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 4 0 20 0;
+#X connect 6 0 3 0;
+#X connect 7 0 6 1;
+#X connect 8 0 3 0;
+#X connect 15 0 3 0;
+#X connect 17 0 4 0;
+#X connect 19 0 17 0;
+#X connect 20 0 6 0;
+#X connect 24 0 33 0;
+#X connect 27 0 24 0;
+#X connect 28 0 34 0;
+#X connect 32 0 28 0;
+#X connect 33 0 15 0;
+#X connect 34 0 7 0;
+#X connect 35 0 37 0;
+#X connect 37 0 17 0;
+#X connect 38 0 35 0;

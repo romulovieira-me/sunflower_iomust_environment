@@ -1,0 +1,25 @@
+#N canvas 2476 307 554 299 10;
+#X obj 123 123 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 3300 1;
+#X obj 120 209 osc/packOSC;
+#X obj 54 252 mrpeach/net/udpsend;
+#X msg 63 93 disconnect;
+#X msg 120 180 send /volume \$1;
+#X msg 52 56 connect 192.168.0.10 40000;
+#X text 221 57 <-- conecta IP e porta;
+#X text 130 92 <-- encerra conexão;
+#X text 258 121 <-- vslider de volume;
+#X text 195 209 <-- converte uma mensagem PD para uma mensagem em OSC
+;
+#X text 218 179 <-- prepara a mensagem OSC;
+#X text 181 250 <-- chama a biblioteca mrpeach \, que cria uma infraestrutura
+de rede para transporte de mensagem OSC na mesma. Ela é enviada sob
+o protocolo UDP \, de forma unidirecional;
+#X floatatom 141 151 5 0 0 0 - - -, f 5;
+#X text 174 150 <-- exibe o volume \, que vai de 0 a 127;
+#X connect 0 0 4 0;
+#X connect 0 0 12 0;
+#X connect 1 0 2 0;
+#X connect 3 0 2 0;
+#X connect 4 0 1 0;
+#X connect 5 0 2 0;
