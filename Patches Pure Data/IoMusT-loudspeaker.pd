@@ -1,0 +1,42 @@
+#N canvas 2075 126 1050 571 10;
+#X obj 551 99 ggee/streamin~ 3000;
+#X obj 552 168 dac~;
+#X obj 492 338 writesf~ 2;
+#X msg 492 485 stop;
+#X text 560 338 <-- grava áudio no mesmo diretório do arquivo principal
+;
+#X text 669 99 <-- recebe áudio pela porta 3000 (loudspeaker);
+#X text 583 168 <-- saída de áudio;
+#X text 18 198 dá nome ao arquivo de áudio e inicia gravação -->
+;
+#X msg 322 198 open magnetico_arq2.wav \, start;
+#X obj 322 97 osc/unpackOSC;
+#X obj 322 59 mrpeach/net/udpreceive 40000;
+#X obj 322 131 osc/routeOSC /recorder;
+#X obj 322 163 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 237 382 osc/unpackOSC;
+#X obj 237 416 osc/routeOSC /recorder;
+#X obj 237 470 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X text 525 485 <-- para a gravação de áudio;
+#X obj 237 339 mrpeach/net/udpreceive 40001;
+#X text 105 56 recebe dados OSC na porta indicada;
+#X text 157 98 converte OSC --> Pure Data;
+#X text 145 131 envia dado para o toggle -->;
+#X text 58 415 envia dado para o toggle -->;
+#X text 73 380 converte OSC --> Pure Data;
+#X text 20 338 recebe dados OSC na porta indicada;
+#X connect 0 0 1 0;
+#X connect 0 0 1 1;
+#X connect 0 0 2 0;
+#X connect 3 0 2 0;
+#X connect 8 0 2 0;
+#X connect 9 0 11 0;
+#X connect 10 0 9 0;
+#X connect 11 0 12 0;
+#X connect 12 0 8 0;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 15 0 3 0;
+#X connect 17 0 13 0;
