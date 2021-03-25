@@ -1,8 +1,0 @@
-#N canvas 484 225 1050 571 10;
-#X obj 312 230 dac~;
-#X obj 311 161 mrpeach/net/udpreceive~ 3000 2;
-#X text 343 230 <-- Audio output;
-#X text 498 161 <-- Receive audio from network \; port number \; channel
-number;
-#X connect 1 0 0 0;
-#X connect 1 0 0 1;
