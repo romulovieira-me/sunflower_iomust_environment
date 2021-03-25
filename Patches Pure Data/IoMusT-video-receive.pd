@@ -1,0 +1,18 @@
+#N canvas 597 571 905 365 12;
+#X obj 138 94 gemhead;
+#X obj 138 179 pix_video;
+#X msg 172 132 dialog;
+#X obj 138 221 pix_texture;
+#X obj 138 268 rectangle 4 3;
+#X obj 138 39 netreceive 3500;
+#X text 247 38 <-- receive video data from network;
+#X text 194 95 <-- Read video data;
+#X text 222 132 <-- indicates video device;
+#X text 211 181 <-- video capture;
+#X text 222 221 <-- video output;
+#X text 239 269 <-- screen size;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 2 0 1 0;
+#X connect 3 0 4 0;
+#X connect 5 0 0 0;

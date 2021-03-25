@@ -1,0 +1,19 @@
+#N canvas 547 175 952 351 10;
+#X obj 123 123 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 0 1;
+#X obj 120 209 osc/packOSC;
+#X obj 54 252 mrpeach/net/udpsend;
+#X msg 63 93 disconnect;
+#X msg 120 180 send /volume \$1;
+#X msg 54 56 connect 239.255.255.250 40000;
+#X text 236 56 <-- connect to multicast address;
+#X text 129 93 <-- close connection;
+#X text 255 120 <-- volume vslider (0 - 127);
+#X text 217 179 <-- send message to volume;
+#X text 195 209 <-- pack message on OSC format;
+#X text 172 253 <-- send OSC message to network;
+#X connect 0 0 4 0;
+#X connect 1 0 2 0;
+#X connect 3 0 2 0;
+#X connect 4 0 1 0;
+#X connect 5 0 2 0;
