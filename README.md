@@ -11,7 +11,7 @@ The environment also intends to accept the connection of different traditional o
 Not done yet
 
 
-## Usage
+## How to Use
 
 For prototyping and testing, Pure Data was used, both to simulate instruments and to allow them to send their data to the network. Pure Data is available for GNU / Linux, macOS, and Windows. The download can be performed at: https://puredata.info/downloads
 
