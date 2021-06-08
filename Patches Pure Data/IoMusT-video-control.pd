@@ -1,0 +1,39 @@
+#N canvas 2065 142 899 566 12;
+#X obj 163 209 osc/packOSC;
+#X obj 97 252 mrpeach/net/udpsend;
+#X msg 106 93 disconnect;
+#X obj 163 125 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 1 1
+;
+#X text 278 56 <-- connect to multicast address;
+#X text 185 89 <-- close connection;
+#X text 345 179 <-- prepare OSC message;
+#X text 250 210 <-- convert Pure Data message to OSC;
+#X text 242 253 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X text 178 122 <-- ON;
+#X obj 163 453 osc/packOSC;
+#X obj 97 496 mrpeach/net/udpsend;
+#X msg 106 337 disconnect;
+#X obj 163 369 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 1
+1;
+#X text 279 298 <-- connect to multicast address;
+#X text 185 333 <-- close connection;
+#X text 352 424 <-- prepare OSC message;
+#X text 250 454 <-- convert Pure Data message to OSC;
+#X text 242 497 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X text 178 366 <-- OFF;
+#X msg 163 180 send /video_control_on \$1;
+#X msg 163 424 send /video_control_off \$1;
+#X msg 97 56 connect 224.0.0.251 40100;
+#X msg 97 299 connect 224.0.0.251 40101;
+#X connect 0 0 1 0;
+#X connect 2 0 1 0;
+#X connect 3 0 20 0;
+#X connect 10 0 11 0;
+#X connect 12 0 11 0;
+#X connect 13 0 21 0;
+#X connect 20 0 0 0;
+#X connect 21 0 10 0;
+#X connect 22 0 1 0;
+#X connect 23 0 11 0;
