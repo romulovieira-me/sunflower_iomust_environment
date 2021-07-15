@@ -1,0 +1,102 @@
+#N canvas 0 182 1920 987 10;
+#X obj 138 210 osc/packOSC;
+#X obj 72 253 mrpeach/net/udpsend;
+#X msg 81 94 disconnect;
+#X obj 138 137 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 709 202 osc/packOSC;
+#X obj 643 245 mrpeach/net/udpsend;
+#X msg 651 68 disconnect;
+#X obj 709 129 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X text 155 135 <-- ON;
+#X text 730 128 <-- OFF;
+#X msg 138 181 send /sound \$1;
+#X msg 709 173 send /sound \$1;
+#X msg 643 44 connect 239.255.255.250 40021;
+#X msg 70 57 connect 239.255.255.250 40020;
+#X text 249 58 <-- connect to multicast address;
+#X text 148 93 <-- close connection;
+#X text 236 180 <-- prepare OSC message;
+#X text 213 210 <-- convert Pure Data to OSC;
+#X text 199 250 <-- send data via network \, in UDP packet \, using
+mrpeach library;
+#X text 832 45 <-- connect to multicast addres;
+#X text 719 68 <-- close connection;
+#X text 804 173 <-- prepare OSC message;
+#X text 783 202 <-- convert Pure Data to OSC;
+#X text 765 245 <-- send data via network \, in UDP packet \, using
+mrpeach library;
+#X text 1302 10 MANAGEMENT LAYER;
+#X msg 1228 603 disconnect;
+#X obj 1181 742 mrpeach/udpsend;
+#X obj 1179 836 t b b b;
+#X obj 1181 783 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1212 786 <-- connection status;
+#X text 1282 705 <-- pack messages on OSC format;
+#X text 1280 741 <-- send messages via network;
+#X msg 1184 142 connect 224.0.0.1 60000;
+#X obj 1183 704 mrpeach/packOSC;
+#X obj 1179 877 route /hello;
+#X obj 1184 90 random 101;
+#X obj 1228 482 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X msg 1228 531 /hello/\$1/192.168.0.10/disconnected;
+#X obj 1184 53 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X obj 1186 118 value id;
+#X obj 1228 506 value id;
+#X text 1214 55 <-- Conecta e gera número de ID aleatóŕio;
+#X text 1251 88 <-- gera número aleatório entre 0 e 100;
+#X text 1244 118 <-- armazena número aleatório;
+#X text 1332 140 <-- conecta no servidor OSC \, exibindo a coisa musical
+para a rede;
+#X text 1466 181 <-- apresenta a coisa musical na rede;
+#X text 1671 219 <-- INPUT message;
+#X text 1556 331 <-- OUTPUT message;
+#X text 1254 485 <-- disconnect;
+#X text 1282 506 <-- número aleatório;
+#X text 1444 530 <-- GOODBYE message;
+#X text 1235 556 Standard GOODBYE message: /hello/ID_number/IP_number/status
+;
+#X text 1196 254 Standar INPUT message: hello/ID_number/IP_Number/port_type/port_type_number/musical_thing_type/min_range/max_range/network_port/network_protocol/music_protocol/human_name/description
+;
+#X text 1198 368 Standard OUTPUT message: /hello/ID_number/IP_number/port_type(output)/port_type_number/network_port_number/musical_things_description/
+;
+#X msg 1185 179 send /hello/\$1/192.168.0.10/GuitarXBassControl;
+#X msg 1186 204 send /hello/\$1/192.168.0.10/input/0/controller/0/1/UDP/OSC/GuitarXBassControlOnOff
+- Liga ou desliga o audio da guitarra/baixo, f 80;
+#X msg 1188 320 send /hello/\$1/192.168.0.10/output/1/controller/40020/ON/40021/OFF/OSC/GuitarXBassControl
+;
+#X connect 0 0 1 0;
+#X connect 2 0 1 0;
+#X connect 3 0 10 0;
+#X connect 4 0 5 0;
+#X connect 6 0 5 0;
+#X connect 7 0 11 0;
+#X connect 10 0 0 0;
+#X connect 11 0 4 0;
+#X connect 12 0 5 0;
+#X connect 13 0 1 0;
+#X connect 25 0 26 0;
+#X connect 26 0 28 0;
+#X connect 27 0 56 0;
+#X connect 27 1 55 0;
+#X connect 27 2 54 0;
+#X connect 32 0 26 0;
+#X connect 33 0 26 0;
+#X connect 34 0 27 0;
+#X connect 35 0 54 0;
+#X connect 35 0 55 0;
+#X connect 35 0 39 0;
+#X connect 35 0 56 0;
+#X connect 36 0 40 0;
+#X connect 37 0 33 0;
+#X connect 37 0 25 0;
+#X connect 38 0 32 0;
+#X connect 38 0 35 0;
+#X connect 40 0 37 0;
+#X connect 54 0 33 0;
+#X connect 55 0 33 0;
+#X connect 56 0 33 0;

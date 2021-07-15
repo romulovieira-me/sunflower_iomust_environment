@@ -1,0 +1,121 @@
+#N canvas 0 182 1920 987 10;
+#X obj 1164 394 adc~;
+#X msg 527 355 disconnect;
+#X floatatom 527 520 5 0 0 0 - - -;
+#X obj 1163 462 *~ 30;
+#X obj 527 96 osc/unpackOSC;
+#X obj 527 245 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 527 73 mrpeach/net/udpreceive 40020;
+#X obj 249 95 osc/unpackOSC;
+#X obj 249 340 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X obj 249 72 mrpeach/net/udpreceive 40021;
+#X obj 1162 335 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 0 1;
+#X obj 1159 243 osc/unpackOSC;
+#X obj 1159 220 mrpeach/net/udpreceive 40000;
+#X obj 1159 291 osc/routeOSC /volume;
+#X obj 448 1 cnv 15 100 60 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X msg 527 311 connect 239.255.255.250 3000;
+#X obj 527 481 mrpeach/net/udpsend~ 2;
+#X text 702 309 <-- connect to multicast;
+#X text 593 355 <-- close connection;
+#X text 560 520 <-- connection status;
+#X text 701 75 <-- Receive OSC messages;
+#X text 97 70 Receive OSC messages -->;
+#X text 1296 333 <-- volume vslider (0 - 127);
+#X text 1201 389 <-- Audio input (guitar/bass should be connected on
+the computer);
+#X text 1203 461 <-- increases audio input volume;
+#X text 1286 290 <-- control volume slider via OSC;
+#X text 367 478 send audio to network -->;
+#X text 1332 221 <-- Receive OSC messages;
+#X text 646 143 <-- control ON button via OSC;
+#X text 545 245 <-- ON;
+#X text 195 340 OFF -->;
+#X obj 249 143 osc/routeOSC /sound;
+#X obj 527 144 osc/routeOSC /sound;
+#X text 611 95 <-- OSC via Pure Data;
+#X text 114 96 OSC via Pure Data -->;
+#X text 267 588 MANAGEMENT LAYER;
+#X msg 1123 712 disconnect;
+#X obj 1076 851 mrpeach/udpsend;
+#X obj 1074 945 t b b b;
+#X obj 1076 892 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1107 895 <-- connection status;
+#X text 1177 814 <-- pack messages on OSC format;
+#X text 1175 850 <-- send messages via network;
+#X msg 248 713 connect 224.0.0.1 60000;
+#X obj 1078 813 mrpeach/packOSC;
+#X obj 1074 986 route /hello;
+#X obj 248 661 random 101;
+#X obj 1123 591 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X msg 1123 640 /hello/\$1/192.168.0.10/disconnected;
+#X obj 248 624 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X obj 250 689 value id;
+#X obj 1123 615 value id;
+#X text 278 626 <-- Conecta e gera número de ID aleatóŕio;
+#X text 315 659 <-- gera número aleatório entre 0 e 100;
+#X text 308 689 <-- armazena número aleatório;
+#X text 396 711 <-- conecta no servidor OSC \, exibindo a coisa musical
+para a rede;
+#X text 500 750 <-- apresenta a coisa musical na rede;
+#X text 745 771 <-- INPUT message;
+#X text 263 823 Standar INPUT message: /hello/ID_number/IP_number/port_type(input)/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X text 620 940 <-- OUTPUT message;
+#X text 266 979 Standard OUTPUT message: /hello/ID_number/IP_number/port_type(output)/port_type_number/network_port_number/network_port_description/
+;
+#X text 1149 594 <-- disconnect;
+#X text 1177 615 <-- número aleatório;
+#X text 1339 639 <-- GOODBYE message;
+#X text 1142 660 Standard GOODBYE message: /hello/ID_number/IP_number/status
+;
+#X msg 249 750 send /hello/\$1/192.168.0.10/GuitarXBass;
+#X msg 250 775 send /hello/\$1/192.168.0.10/input/0/audio/44100/16bits/2/40000/Volume/40020/ON/40021/OFF/UDP/OSC/GuitarXBass
+, f 80;
+#X msg 250 932 send /hello/\$1/192.168.0.10/output/1/audio/44100/16bits/2/3000/Loudspeaker
+;
+#X connect 0 0 3 0;
+#X connect 1 0 16 0;
+#X connect 3 0 16 0;
+#X connect 4 0 32 0;
+#X connect 5 0 15 0;
+#X connect 6 0 4 0;
+#X connect 7 0 31 0;
+#X connect 8 0 1 0;
+#X connect 9 0 7 0;
+#X connect 10 0 16 0;
+#X connect 11 0 13 0;
+#X connect 12 0 11 0;
+#X connect 13 0 10 0;
+#X connect 15 0 16 0;
+#X connect 16 0 2 0;
+#X connect 31 0 8 0;
+#X connect 32 0 5 0;
+#X connect 36 0 37 0;
+#X connect 37 0 39 0;
+#X connect 38 0 67 0;
+#X connect 38 1 66 0;
+#X connect 38 2 65 0;
+#X connect 43 0 37 0;
+#X connect 44 0 37 0;
+#X connect 45 0 38 0;
+#X connect 46 0 65 0;
+#X connect 46 0 66 0;
+#X connect 46 0 67 0;
+#X connect 46 0 50 0;
+#X connect 47 0 51 0;
+#X connect 48 0 44 0;
+#X connect 48 0 36 0;
+#X connect 49 0 43 0;
+#X connect 49 0 46 0;
+#X connect 51 0 48 0;
+#X connect 65 0 44 0;
+#X connect 66 0 44 0;
+#X connect 67 0 44 0;

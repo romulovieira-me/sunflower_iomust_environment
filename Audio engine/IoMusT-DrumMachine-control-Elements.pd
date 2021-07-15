@@ -1,0 +1,88 @@
+#N canvas 1920 64 1366 704 12;
+#X msg 760 566 disconnect;
+#X obj 713 705 mrpeach/udpsend;
+#X obj 711 799 t b b b;
+#X obj 713 746 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1 0
+1;
+#X text 744 749 <-- connection status;
+#X text 826 668 <-- pack messages on OSC format;
+#X text 827 704 <-- send messages via network;
+#X msg 716 105 connect 224.0.0.1 60000;
+#X obj 715 667 mrpeach/packOSC;
+#X obj 711 840 route /hello;
+#X obj 716 53 random 101;
+#X obj 760 445 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X msg 760 494 /hello/\$1/192.168.0.10/disconnected;
+#X obj 716 16 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X obj 718 81 value id;
+#X obj 760 469 value id;
+#X text 746 18 <-- Conecta e gera número de ID aleatóŕio;
+#X text 793 53 <-- gera número aleatório entre 0 e 100;
+#X text 780 80 <-- armazena número aleatório;
+#X text 886 104 <-- conecta no servidor OSC \, exibindo a coisa musical
+para a rede;
+#X text 1286 182 <-- INPUT message;
+#X text 1149 321 <-- OUTPUT message;
+#X text 786 448 <-- disconnect;
+#X text 822 467 <-- número aleatório;
+#X text 1018 494 <-- GOODBYE message;
+#X text 767 519 Standard GOODBYE message: /hello/ID_number/IP_number/status
+;
+#X text 730 209 Standar INPUT message: hello/ID_number/IP_Number/port_type/port_type_number/musical_thing_type/min_range/max_range/network_port/network_protocol/music_protocol/human_name/description
+;
+#X text 734 364 Standard OUTPUT message: /hello/ID_number/IP_number/port_type(output)/port_type_number/network_port_number/musical_things_description/
+;
+#X text 1131 141 <-- apresenta a coisa musical na rede;
+#X obj 50 218 osc/packOSC;
+#X obj 28 248 mrpeach/net/udpsend;
+#X msg 39 89 disconnect;
+#X floatatom 50 151 5 0 100 0 - - -;
+#X floatatom 167 151 5 0 100 0 - - -;
+#X floatatom 271 150 5 0 100 0 - - -;
+#X msg 50 177 send /kick \$1;
+#X msg 167 177 send /snare \$1;
+#X msg 271 176 send /hats \$1;
+#X text 208 50 <-- connect to multicast address;
+#X text 115 88 <-- close connection;
+#X text 310 148 <-- drum elements volume control;
+#X msg 28 51 connect 224.0.0.251 40012;
+#X text 164 249 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X text 133 219 <-- pack message on OSC format;
+#X msg 717 142 send /hello/\$1/192.168.0.10/DrumMachineElements;
+#X msg 719 169 send /hello/\$1/192.168.0.10/input/0/controller/0/100/UDP/OSC/DrumMachineElements
+- Controla o volume dos componentes da bateria, f 80;
+#X msg 723 308 send /hello/\$1/192.168.0.10/output/0/100/controller/40012/Elements/OSC/DrumMachine
+;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 2 0 46 0;
+#X connect 2 1 45 0;
+#X connect 2 2 44 0;
+#X connect 7 0 1 0;
+#X connect 8 0 1 0;
+#X connect 9 0 2 0;
+#X connect 10 0 44 0;
+#X connect 10 0 45 0;
+#X connect 10 0 14 0;
+#X connect 10 0 46 0;
+#X connect 11 0 15 0;
+#X connect 12 0 8 0;
+#X connect 12 0 0 0;
+#X connect 13 0 7 0;
+#X connect 13 0 10 0;
+#X connect 15 0 12 0;
+#X connect 29 0 30 0;
+#X connect 31 0 30 0;
+#X connect 32 0 35 0;
+#X connect 33 0 36 0;
+#X connect 34 0 37 0;
+#X connect 35 0 29 0;
+#X connect 36 0 29 0;
+#X connect 37 0 29 0;
+#X connect 41 0 30 0;
+#X connect 44 0 8 0;
+#X connect 45 0 8 0;
+#X connect 46 0 8 0;

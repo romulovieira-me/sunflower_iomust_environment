@@ -1,0 +1,102 @@
+#N canvas 0 182 1920 987 12;
+#X obj 163 209 osc/packOSC;
+#X obj 97 252 mrpeach/net/udpsend;
+#X msg 106 93 disconnect;
+#X obj 163 125 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X text 278 56 <-- connect to multicast address;
+#X text 185 89 <-- close connection;
+#X text 345 179 <-- prepare OSC message;
+#X text 250 210 <-- convert Pure Data message to OSC;
+#X text 242 253 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X text 178 122 <-- ON;
+#X obj 163 453 osc/packOSC;
+#X obj 97 496 mrpeach/net/udpsend;
+#X msg 106 337 disconnect;
+#X obj 163 369 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X text 279 298 <-- connect to multicast address;
+#X text 185 333 <-- close connection;
+#X text 352 424 <-- prepare OSC message;
+#X text 250 454 <-- convert Pure Data message to OSC;
+#X text 242 497 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X text 178 366 <-- OFF;
+#X msg 163 180 send /video_control_on \$1;
+#X msg 163 424 send /video_control_off \$1;
+#X msg 97 56 connect 224.0.0.251 40100;
+#X msg 97 299 connect 224.0.0.251 40101;
+#X text 973 11 MANAGEMENT LAYER;
+#X msg 899 604 disconnect;
+#X obj 852 743 mrpeach/udpsend;
+#X obj 850 837 t b b b;
+#X obj 852 784 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1 0
+1;
+#X text 883 787 <-- connection status;
+#X text 967 703 <-- pack messages on OSC format;
+#X text 967 744 <-- send messages via network;
+#X msg 855 143 connect 224.0.0.1 60000;
+#X obj 854 705 mrpeach/packOSC;
+#X obj 850 878 route /hello;
+#X obj 855 91 random 101;
+#X obj 899 483 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X msg 899 532 /hello/\$1/192.168.0.10/disconnected;
+#X obj 855 54 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X obj 857 119 value id;
+#X obj 899 507 value id;
+#X text 885 56 <-- Conecta e gera número de ID aleatóŕio;
+#X text 928 89 <-- gera número aleatório entre 0 e 100;
+#X text 919 119 <-- armazena número aleatório;
+#X text 1026 142 <-- conecta no servidor OSC \, exibindo a coisa musical
+para a rede;
+#X text 1147 180 <-- apresenta a coisa musical na rede;
+#X text 1423 213 <-- INPUT message;
+#X text 1287 338 <-- OUTPUT message;
+#X text 925 486 <-- disconnect;
+#X text 965 507 <-- número aleatório;
+#X text 1151 532 <-- GOODBYE message;
+#X text 906 557 Standard GOODBYE message: /hello/ID_number/IP_number/status
+;
+#X text 867 242 Standar INPUT message: hello/ID_number/IP_Number/port_type/port_type_number/musical_thing_type/min_range/max_range/network_port/network_protocol/music_protocol/human_name/description
+;
+#X text 871 375 Standard OUTPUT message: /hello/ID_number/IP_number/port_type(output)/port_type_number/network_port_number/musical_things_description/
+;
+#X msg 856 180 send /hello/\$1/192.168.0.10/VideoControl;
+#X msg 857 205 send /hello/\$1/192.168.0.10/input/0/controller/0/1/UDP/OSC/VideoControl
+- Controla o video de forma remota, f 80;
+#X msg 859 321 send /hello/\$1/192.168.0.10/output/1/controller/40100/ON/40101/OFF/OSCmessage/Video_sender
+;
+#X connect 0 0 1 0;
+#X connect 2 0 1 0;
+#X connect 3 0 20 0;
+#X connect 10 0 11 0;
+#X connect 12 0 11 0;
+#X connect 13 0 21 0;
+#X connect 20 0 0 0;
+#X connect 21 0 10 0;
+#X connect 22 0 1 0;
+#X connect 23 0 11 0;
+#X connect 25 0 26 0;
+#X connect 26 0 28 0;
+#X connect 27 0 56 0;
+#X connect 27 1 55 0;
+#X connect 27 2 54 0;
+#X connect 32 0 26 0;
+#X connect 33 0 26 0;
+#X connect 34 0 27 0;
+#X connect 35 0 54 0;
+#X connect 35 0 55 0;
+#X connect 35 0 56 0;
+#X connect 35 0 39 0;
+#X connect 36 0 40 0;
+#X connect 37 0 33 0;
+#X connect 37 0 25 0;
+#X connect 38 0 32 0;
+#X connect 38 0 35 0;
+#X connect 40 0 37 0;
+#X connect 54 0 33 0;
+#X connect 55 0 33 0;
+#X connect 56 0 33 0;
