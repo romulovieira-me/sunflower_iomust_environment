@@ -1,0 +1,83 @@
+#N canvas 0 182 1920 987 12;
+#X msg 706 644 disconnect;
+#X obj 672 724 mrpeach/udpsend;
+#X obj 670 818 t b b b;
+#X obj 672 765 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1 0
+1;
+#X text 703 768 <-- connection status;
+#X text 785 687 <-- pack messages on OSC format;
+#X text 786 723 <-- send messages via network;
+#X msg 675 124 connect 224.0.0.1 60000;
+#X obj 674 686 mrpeach/packOSC;
+#X obj 675 72 random 101;
+#X obj 706 523 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X msg 706 572 /hello/\$1/192.168.0.10/disconnected;
+#X obj 675 35 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X obj 677 100 value id;
+#X obj 706 547 value id;
+#X text 705 37 <-- Conecta e gera número de ID aleatóŕio;
+#X text 752 72 <-- gera número aleatório entre 0 e 100;
+#X text 739 99 <-- armazena número aleatório;
+#X text 845 123 <-- conecta no servidor OSC \, exibindo a coisa musical
+para a rede;
+#X text 1244 232 <-- INPUT message;
+#X text 1112 379 <-- OUTPUT message;
+#X text 732 526 <-- disconnect;
+#X text 768 545 <-- número aleatório;
+#X text 964 572 <-- GOODBYE message;
+#X text 713 597 Standard GOODBYE message: /hello/ID_number/IP_number/status
+;
+#X text 994 161 <-- apresenta a coisa musical na rede;
+#X obj 92 203 osc/packOSC;
+#X obj 26 246 mrpeach/net/udpsend;
+#X msg 35 87 disconnect;
+#X obj 92 116 tgl 15 0 empty empty empty 17 7 0 10 -232576 -1 -1 0
+1;
+#X msg 92 174 send /drum \$1;
+#X text 210 50 <-- connect to multicast address;
+#X text 114 86 <-- close connection;
+#X text 108 114 <-- ON/OFF drum machine;
+#X text 191 173 <-- prepare OSC message;
+#X text 175 204 <-- convert Pure Data message to OSC;
+#X text 169 246 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X msg 26 50 connect 224.0.0.251 40010;
+#X msg 676 161 send /hello/\$1/192.168.0.10/DrumMachineOnOff;
+#X text 683 418 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 688 263 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X text 1022 180 Standard HELLO message: /hello/id/ip/human_name;
+#X obj 670 859 route /hello /input /output;
+#X msg 684 365 send /output/\$1/192.168.0.10/0/1/controller/40010/OnOff/OSC/DrumMachine
+;
+#X msg 677 225 send /input/\$1/192.168.0.10/0/controller/0/1/UDP/OSC/DrumMachineOnOff
+- Liga ou desliga a Drum Machine de forma remota, f 80;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 2 0 43 0;
+#X connect 2 1 44 0;
+#X connect 2 2 38 0;
+#X connect 7 0 1 0;
+#X connect 8 0 1 0;
+#X connect 9 0 38 0;
+#X connect 9 0 44 0;
+#X connect 9 0 13 0;
+#X connect 9 0 43 0;
+#X connect 10 0 14 0;
+#X connect 11 0 8 0;
+#X connect 11 0 0 0;
+#X connect 12 0 7 0;
+#X connect 12 0 9 0;
+#X connect 14 0 11 0;
+#X connect 26 0 27 0;
+#X connect 28 0 27 0;
+#X connect 29 0 30 0;
+#X connect 30 0 26 0;
+#X connect 37 0 27 0;
+#X connect 38 0 8 0;
+#X connect 42 0 2 0;
+#X connect 43 0 8 0;
+#X connect 44 0 8 0;
