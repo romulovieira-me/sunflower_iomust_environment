@@ -1,0 +1,106 @@
+#N canvas 0 182 1920 987 12;
+#X obj 444 22 import Gem;
+#X msg 265 212 create \, 1;
+#X msg 282 242 destroy;
+#X obj 265 358 gemwin;
+#X obj 595 378 netsend;
+#X msg 279 273 dimen 500 500;
+#X text 519 22 <-- import external Gem \, to allow video;
+#X text 339 212 <-- create video object;
+#X text 337 242 <-- close video object;
+#X text 375 273 <-- screen dimensions;
+#X text 648 378 <-- send video data to network;
+#X text 313 355 <-- video object creator;
+#X obj 265 175 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 265 97 osc/unpackOSC;
+#X obj 265 65 mrpeach/net/udpreceive 40100;
+#X obj 597 168 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X obj 597 90 osc/unpackOSC;
+#X text 614 165 <-- STOP video recording via OSC;
+#X text 282 172 <-- START video recording OSC;
+#X text 799 58 <-- receive OSC message from network;
+#X text 696 90 <-- convert OSC message to Pure data;
+#X text 5 66 receive OSC message from network -->;
+#X text 6 96 convert OSC message to Pure data -->;
+#X obj 597 128 osc/routeOSC /video_control_off;
+#X obj 265 135 osc/routeOSC /video_control_on;
+#X obj 597 58 mrpeach/net/udpreceive 40101;
+#X text 1241 3 MANAGEMENT LAYER;
+#X msg 1195 653 disconnect;
+#X obj 1168 728 mrpeach/udpsend;
+#X obj 1166 822 t b b b;
+#X obj 1168 769 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1199 772 <-- connection status;
+#X text 1284 688 <-- pack messages on OSC format;
+#X text 1279 728 <-- send messages via network;
+#X msg 1171 128 connect 224.0.0.1 60000;
+#X obj 1170 690 mrpeach/packOSC;
+#X obj 1171 76 random 101;
+#X obj 1195 532 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 1171 39 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 1201 41 <-- Conecta e gera número de ID aleatóŕio;
+#X text 1245 74 <-- gera número aleatório entre 0 e 100;
+#X text 1251 103 <-- armazena número aleatório;
+#X text 1340 127 <-- conecta no servidor OSC \, exibindo a coisa musical
+para a rede;
+#X text 1456 164 <-- apresenta a coisa musical na rede;
+#X text 1746 274 <-- INPUT message;
+#X text 1525 430 <-- OUTPUT message;
+#X text 1221 535 <-- disconnect;
+#X text 1271 556 <-- número aleatório;
+#X text 1550 580 <-- GOODBYE message;
+#X msg 1172 165 send /hello/\$1/192.168.0.10/VideoSender;
+#X text 1176 461 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 1180 310 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X text 1471 186 Standard HELLO message: /hello/id/ip/human_name;
+#X msg 1174 432 send /output/\$1/192.168.0.10/1/video/VideoReceive
+;
+#X msg 1174 253 send /input/\$1/192.168.0.10/0/video/500x500/RGB/MPEG4/40100/ON/40101/OFF/UDP/OSC/VideoSender
+, f 80;
+#X obj 1173 104 value id25;
+#X obj 1194 556 value id25;
+#X obj 1166 863 route /hello /input /output /goodbye;
+#X text 1202 606 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X msg 1195 581 /goodbye/\$1/192.168.0.10/VideoSender/disconnected
+;
+#X connect 1 0 3 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 5 0 3 0;
+#X connect 12 0 1 0;
+#X connect 13 0 24 0;
+#X connect 14 0 13 0;
+#X connect 15 0 2 0;
+#X connect 16 0 23 0;
+#X connect 23 0 15 0;
+#X connect 24 0 12 0;
+#X connect 25 0 16 0;
+#X connect 27 0 28 0;
+#X connect 28 0 30 0;
+#X connect 29 0 53 0;
+#X connect 29 1 54 0;
+#X connect 29 2 49 0;
+#X connect 34 0 28 0;
+#X connect 35 0 28 0;
+#X connect 36 0 49 0;
+#X connect 36 0 54 0;
+#X connect 36 0 53 0;
+#X connect 36 0 55 0;
+#X connect 37 0 56 0;
+#X connect 38 0 34 0;
+#X connect 38 0 36 0;
+#X connect 49 0 35 0;
+#X connect 53 0 35 0;
+#X connect 54 0 35 0;
+#X connect 56 0 59 0;
+#X connect 57 0 29 0;
+#X connect 59 0 35 0;
+#X connect 59 0 27 0;

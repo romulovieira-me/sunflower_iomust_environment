@@ -1,0 +1,91 @@
+#N canvas 0 182 1920 987 12;
+#X obj 122 149 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -4032
+-1 -1 0 1;
+#X obj 119 235 osc/packOSC;
+#X obj 53 278 mrpeach/net/udpsend;
+#X msg 62 119 disconnect;
+#X msg 119 206 send /freq_pitch \$1;
+#X obj 143 177 mtof;
+#X floatatom 209 176 5 0 0 0 - - -;
+#X text 208 50 FREQUENCY;
+#X text 229 83 <-- connect to multicast address;
+#X text 129 118 <-- close connection;
+#X text 257 147 <-- frequency vslider;
+#X text 247 178 <-- Hertz value;
+#X text 237 205 <-- send message;
+#X text 194 235 <-- convert Pure Data to OSC;
+#X text 172 279 <-- send message via network;
+#X msg 51 82 connect 224.0.0.251 40052;
+#X text 719 15 MANAGEMENT LAYER;
+#X msg 636 675 disconnect;
+#X obj 598 747 mrpeach/udpsend;
+#X obj 596 841 t b b b;
+#X obj 598 788 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1 0
+1;
+#X text 629 791 <-- connection status;
+#X text 712 708 <-- pack messages on OSC format;
+#X text 709 746 <-- send messages via network;
+#X msg 601 147 connect 224.0.0.1 60000;
+#X obj 600 709 mrpeach/packOSC;
+#X obj 601 95 random 101;
+#X obj 636 554 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 601 58 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 631 60 <-- Conecta e gera número de ID aleatóŕio;
+#X text 675 93 <-- gera número aleatório entre 0 e 100;
+#X text 679 121 <-- armazena número aleatório;
+#X text 771 145 <-- conecta no servidor OSC \, exibindo a coisa musical
+para a rede;
+#X text 987 183 <-- apresenta a coisa musical na rede;
+#X text 1174 259 <-- INPUT message, f 23;
+#X text 1037 415 <-- OUTPUT message;
+#X text 662 557 <-- disconnect;
+#X text 713 578 <-- número aleatório;
+#X text 1068 608 <-- GOODBYE message;
+#X msg 602 184 send /hello/\$1/192.168.0.10/PitchforkControl_Frequency
+;
+#X text 608 459 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 610 293 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X text 1014 202 Standard HELLO message: /hello/id/ip/human_name;
+#X msg 605 400 send /output/\$1/192.168.0.10/1/controller/40052/OSCmessage/Pitchfork
+;
+#X msg 604 241 send /input/\$1/192.168.0.10/0/controller/0/127/UDP/OSC/PitchforckControlFrequency
+- Controla a frequency do Pitchfork de forma remota, f 80;
+#X obj 603 123 value id18;
+#X obj 636 578 value id18;
+#X obj 596 882 route /hello /input /output /goodbye;
+#X msg 636 603 /goodbye/\$1/192.168.0.10/PitchforkControl_Frequency/disconnected
+;
+#X text 641 636 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X connect 0 0 4 0;
+#X connect 0 0 5 0;
+#X connect 1 0 2 0;
+#X connect 3 0 2 0;
+#X connect 4 0 1 0;
+#X connect 5 0 6 0;
+#X connect 15 0 2 0;
+#X connect 17 0 18 0;
+#X connect 18 0 20 0;
+#X connect 19 0 43 0;
+#X connect 19 1 44 0;
+#X connect 19 2 39 0;
+#X connect 24 0 18 0;
+#X connect 25 0 18 0;
+#X connect 26 0 39 0;
+#X connect 26 0 44 0;
+#X connect 26 0 43 0;
+#X connect 26 0 45 0;
+#X connect 27 0 46 0;
+#X connect 28 0 24 0;
+#X connect 28 0 26 0;
+#X connect 39 0 25 0;
+#X connect 43 0 25 0;
+#X connect 44 0 25 0;
+#X connect 46 0 48 0;
+#X connect 47 0 19 0;
+#X connect 48 0 25 0;
+#X connect 48 0 17 0;
