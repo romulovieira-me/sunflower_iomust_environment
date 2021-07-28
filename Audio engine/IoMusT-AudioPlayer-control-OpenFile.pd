@@ -1,0 +1,87 @@
+#N canvas 0 182 1920 987 12;
+#X text 788 20 MANAGEMENT LAYER;
+#X msg 713 670 disconnect;
+#X obj 667 752 mrpeach/udpsend;
+#X obj 665 846 t b b b;
+#X obj 667 793 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1 0
+1;
+#X text 698 796 <-- connection status;
+#X text 783 712 <-- pack messages on OSC format;
+#X text 779 751 <-- send messages via network;
+#X msg 670 152 connect 224.0.0.1 60000;
+#X obj 669 714 mrpeach/packOSC;
+#X obj 670 100 random 101;
+#X obj 713 549 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 670 63 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 700 65 <-- Conecta e gera número de ID aleatóŕio;
+#X text 747 100 <-- gera número aleatório entre 0 e 100;
+#X text 739 127 <-- armazena número aleatório;
+#X text 840 151 <-- conecta no servidor OSC \, exibindo a coisa musical
+para a rede;
+#X text 1232 252 <-- INPUT message;
+#X text 1113 393 <-- OUTPUT message;
+#X text 739 552 <-- disconnect;
+#X text 784 572 <-- número aleatório;
+#X text 1143 604 <-- GOODBYE message;
+#X msg 53 77 disconnect;
+#X obj 87 106 bng 15 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X msg 87 140 send /audioplayer_openfile \$1;
+#X obj 87 174 osc/packOSC;
+#X obj 41 230 mrpeach/net/udpsend;
+#X text 222 48 <-- Connect to the multicast address \, on the indicated
+port;
+#X text 130 76 <-- Close connection;
+#X text 104 103 <-- open audio file folder;
+#X text 296 139 <-- sends the command in OSC format;
+#X text 170 172 <-- convert Pure Data message to OSC;
+#X text 182 229 <-- send OSC data packaged in UDP \, using the mr peach
+library;
+#X msg 41 49 connect 224.0.0.251 40004;
+#X text 1061 186 <-- apresenta a coisa musical na rede;
+#X msg 671 189 send /hello/\$1/192.168.0.10/AudioPlayerControlOpenFile
+;
+#X text 684 431 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 678 287 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X text 1087 206 Standard HELLO message: /hello/id/ip/human_name;
+#X msg 675 380 send /output/\$1/192.168.0.10/1/controller/40004/Open/OSC/AudioPlayer
+;
+#X obj 672 128 value id5;
+#X obj 713 573 value id5;
+#X obj 665 887 route /hello /input /output /goodbye;
+#X msg 713 598 /goodbye/\$1/192.168.0.10/AudioPlayer_control_OpenFiledisconnected
+;
+#X text 715 632 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X msg 671 251 send /input/\$1/192.168.0.10/0/controller/0/1/UDP/OSC/AudioPlayerControlOpenFILE
+, f 79;
+#X connect 1 0 2 0;
+#X connect 2 0 4 0;
+#X connect 3 0 39 0;
+#X connect 3 1 45 0;
+#X connect 3 2 35 0;
+#X connect 8 0 2 0;
+#X connect 9 0 2 0;
+#X connect 10 0 35 0;
+#X connect 10 0 45 0;
+#X connect 10 0 39 0;
+#X connect 10 0 40 0;
+#X connect 11 0 41 0;
+#X connect 12 0 8 0;
+#X connect 12 0 10 0;
+#X connect 22 0 26 0;
+#X connect 23 0 24 0;
+#X connect 24 0 25 0;
+#X connect 25 0 26 0;
+#X connect 33 0 26 0;
+#X connect 35 0 9 0;
+#X connect 39 0 9 0;
+#X connect 41 0 43 0;
+#X connect 42 0 3 0;
+#X connect 43 0 9 0;
+#X connect 43 0 1 0;
+#X connect 45 0 9 0;
