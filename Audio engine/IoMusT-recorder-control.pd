@@ -1,0 +1,159 @@
+#N canvas 0 182 1920 987 10;
+#X obj 120 208 osc/packOSC;
+#X obj 52 247 mrpeach/net/udpsend;
+#X msg 120 180 send /recorder \$1;
+#X obj 120 135 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 585 207 osc/packOSC;
+#X obj 517 250 mrpeach/net/udpsend;
+#X msg 528 92 disconnect;
+#X msg 585 179 send /recorder \$1;
+#X obj 585 134 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X text 606 131 <-- interrompe gravação;
+#X text 234 55 <-- connect to multicast address;
+#X text 140 132 <-- START recording;
+#X text 233 179 <-- send message;
+#X text 195 209 <-- pack message in OSC format;
+#X text 172 248 <-- send OSC message via Network;
+#X text 697 53 <-- connect to multicast address;
+#X text 249 92 <-- close connection;
+#X text 592 93 <-- close connection;
+#X text 694 179 <-- send message;
+#X text 660 208 <-- pack message in OSC format;
+#X text 637 251 <-- send OSC message via Network;
+#X msg 52 56 connect 224.0.0.251 40060;
+#X msg 517 55 connect 224.0.0.251 40061;
+#X text 1149 24 MANAGEMENT LAYER;
+#X msg 1052 689 disconnect;
+#X obj 1028 756 mrpeach/udpsend;
+#X obj 1026 850 t b b b;
+#X obj 1028 797 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1059 800 <-- connection status;
+#X text 1129 719 <-- pack messages on OSC format;
+#X text 1127 755 <-- send messages via network;
+#X msg 1031 156 connect 224.0.0.1 60000;
+#X obj 1030 718 mrpeach/packOSC;
+#X obj 1031 104 random 101;
+#X obj 1052 568 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 1031 67 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 1457 252 <-- INPUT message;
+#X text 1406 405 <-- OUTPUT message;
+#X text 1078 571 <-- disconnect;
+#X text 1377 618 <-- GOODBYE message;
+#X msg 1032 193 send /hello/\$1/192.168.0.10/RecorderControl;
+#X text 1063 444 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 1321 210 Standard HELLO message: /hello/id/ip/human_name;
+#X msg 1037 395 send /output/\$1/192.168.0.10/1/controller/40060/ON/40061/OFF/OSCmessage/Recorder
+;
+#X obj 1026 891 route /hello /input /output /goodbye;
+#X obj 1033 132 value id22;
+#X obj 1052 592 value id22;
+#X msg 1052 617 /goodbye/\$1/192.168.0.10/RecorderControl/disconnected
+;
+#X text 1070 639 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X obj 436 455 osc/unpackOSC;
+#X obj 436 482 osc/routeOSC /connection;
+#X obj 436 508 list;
+#X text 38 412 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 261 452 unpack OSC messages -->;
+#X text 141 481 route the OSC message to this address -->;
+#X text 213 506 put the message into a list -->;
+#X obj 434 601 osc/unpackOSC;
+#X obj 434 654 list;
+#X text 35 560 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 266 601 unpack OSC messages -->;
+#X text 142 628 route the OSC message to this address -->;
+#X text 207 652 put the message into a list -->;
+#X obj 434 628 osc/routeOSC /disconnection;
+#X obj 434 742 osc/unpackOSC;
+#X obj 434 769 osc/routeOSC /connection;
+#X obj 434 795 list;
+#X text 36 699 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 259 739 unpack OSC messages -->;
+#X text 139 768 route the OSC message to this address -->;
+#X text 211 793 put the message into a list -->;
+#X obj 432 888 osc/unpackOSC;
+#X obj 432 941 list;
+#X text 33 847 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 264 888 unpack OSC messages -->;
+#X text 140 915 route the OSC message to this address -->;
+#X text 205 939 put the message into a list -->;
+#X obj 432 915 osc/routeOSC /disconnection;
+#X obj 436 414 mrpeach/net/udpreceive 224.0.0.0 55043;
+#X obj 434 701 mrpeach/net/udpreceive 224.0.0.0 55044;
+#X obj 434 559 mrpeach/net/udpreceive 224.0.0.0 55045;
+#X obj 432 846 mrpeach/net/udpreceive 224.0.0.0 55046;
+#X msg 63 93 disconnect 224.0.0.0251 40060;
+#X floatatom 52 286 5 0 1 0 - - -;
+#X text 88 286 <-- connection status;
+#X floatatom 517 291 5 0 1 0 - - -;
+#X text 554 290 <-- connection status;
+#X text 1061 69 <-- Connect and generates a random ID number;
+#X text 1098 102 <-- random ID number;
+#X text 1101 132 <-- store random ID number;
+#X text 1119 592 <-- random ID number;
+#X text 1179 154 <-- connect to OSC server;
+#X text 1298 193 <-- presents musical thing to the network;
+#X text 1047 289 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/IP_connection/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X msg 1035 239 send /input/\$1/192.168.0.10/0/controller/0/1/224.0.0.0/55043/ON_CLI/55044/ON1_CLI/55045/OFF_CLI/55046/OFF1_CLI/UDP/OSC/RecorderControl
+, f 68;
+#X connect 0 0 1 0;
+#X connect 1 0 82 0;
+#X connect 2 0 0 0;
+#X connect 3 0 2 0;
+#X connect 4 0 5 0;
+#X connect 5 0 84 0;
+#X connect 6 0 5 0;
+#X connect 7 0 4 0;
+#X connect 8 0 7 0;
+#X connect 21 0 1 0;
+#X connect 22 0 5 0;
+#X connect 24 0 25 0;
+#X connect 25 0 27 0;
+#X connect 26 0 43 0;
+#X connect 26 1 93 0;
+#X connect 26 2 40 0;
+#X connect 31 0 25 0;
+#X connect 32 0 25 0;
+#X connect 33 0 40 0;
+#X connect 33 0 93 0;
+#X connect 33 0 43 0;
+#X connect 33 0 45 0;
+#X connect 34 0 46 0;
+#X connect 35 0 31 0;
+#X connect 35 0 33 0;
+#X connect 40 0 32 0;
+#X connect 43 0 32 0;
+#X connect 44 0 26 0;
+#X connect 46 0 47 0;
+#X connect 47 0 32 0;
+#X connect 47 0 24 0;
+#X connect 49 0 50 0;
+#X connect 50 0 51 0;
+#X connect 51 0 21 0;
+#X connect 56 0 62 0;
+#X connect 57 0 81 0;
+#X connect 62 0 57 0;
+#X connect 63 0 64 0;
+#X connect 64 0 65 0;
+#X connect 65 0 22 0;
+#X connect 70 0 76 0;
+#X connect 71 0 6 0;
+#X connect 76 0 71 0;
+#X connect 77 0 49 0;
+#X connect 78 0 63 0;
+#X connect 79 0 56 0;
+#X connect 80 0 70 0;
+#X connect 81 0 1 0;
+#X connect 93 0 32 0;

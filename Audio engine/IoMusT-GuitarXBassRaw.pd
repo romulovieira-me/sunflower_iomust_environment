@@ -1,0 +1,148 @@
+#N canvas 0 182 1920 987 10;
+#X obj 802 478 adc~;
+#X floatatom 527 520 5 0 0 0 - - -;
+#X obj 801 546 *~ 30;
+#X obj 527 96 osc/unpackOSC;
+#X obj 527 245 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 527 73 mrpeach/net/udpreceive 40020;
+#X obj 249 95 osc/unpackOSC;
+#X obj 249 340 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X obj 249 72 mrpeach/net/udpreceive 40021;
+#X obj 1150 433 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 0 1;
+#X obj 1147 341 osc/unpackOSC;
+#X obj 1147 318 mrpeach/net/udpreceive 40000;
+#X obj 1147 389 osc/routeOSC /volume;
+#X obj 448 1 cnv 15 100 60 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X msg 527 311 connect 239.255.255.250 3000;
+#X obj 527 481 mrpeach/net/udpsend~ 2;
+#X text 702 309 <-- connect to multicast;
+#X text 721 354 <-- close connection;
+#X text 560 520 <-- connection status;
+#X text 701 75 <-- Receive OSC messages;
+#X text 97 70 Receive OSC messages -->;
+#X text 1284 431 <-- volume vslider (0 - 127);
+#X text 839 473 <-- Audio input (guitar/bass should be connected on
+the computer);
+#X text 841 545 <-- increases audio input volume;
+#X text 1274 388 <-- control volume slider via OSC;
+#X text 367 478 send audio to network -->;
+#X text 1320 319 <-- Receive OSC messages;
+#X text 646 143 <-- control ON button via OSC;
+#X text 545 245 <-- ON;
+#X text 195 340 OFF -->;
+#X obj 249 143 osc/routeOSC /sound;
+#X obj 527 144 osc/routeOSC /sound;
+#X text 611 95 <-- OSC via Pure Data;
+#X text 114 96 OSC via Pure Data -->;
+#X text 267 588 MANAGEMENT LAYER;
+#X msg 1078 773 disconnect;
+#X obj 1076 851 mrpeach/udpsend;
+#X obj 1074 945 t b b b;
+#X obj 1076 892 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1107 895 <-- connection status;
+#X text 1177 814 <-- pack messages on OSC format;
+#X text 1175 850 <-- send messages via network;
+#X msg 248 713 connect 224.0.0.1 60000;
+#X obj 1078 813 mrpeach/packOSC;
+#X obj 248 661 random 101;
+#X obj 1078 652 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 248 624 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 744 778 <-- INPUT message;
+#X text 618 948 <-- OUTPUT message;
+#X text 1104 655 <-- disconnect;
+#X text 1379 700 <-- GOODBYE message;
+#X msg 249 750 send /hello/\$1/192.168.0.10/GuitarXBass;
+#X text 251 975 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 514 756 Standard HELLO message: /hello/id/ip/human_name;
+#X msg 250 932 send /output/\$1/192.168.0.10/output/1/audio/44100/16bits/2/3000/Loudspeaker
+;
+#X obj 250 689 value id3;
+#X obj 1078 676 value id3;
+#X msg 1078 701 /goodbye/\$1/192.168.0.10/GuitarXBass/disconnected
+;
+#X obj 1074 986 route /hello /input /output /goodbye;
+#X text 1097 721 Standard GOODBYE message: /goodbye/ID_number/human_name/IP_number/status
+;
+#X obj 1153 93 osc/unpackOSC;
+#X obj 1153 120 osc/routeOSC /connection;
+#X obj 1153 146 list;
+#X obj 1149 233 osc/unpackOSC;
+#X obj 1149 286 list;
+#X obj 1149 260 osc/routeOSC /disconnection;
+#X obj 1153 52 mrpeach/net/udpreceive 224.0.0.0 55023;
+#X obj 1149 191 mrpeach/net/udpreceive 224.0.0.0 55024;
+#X text 1392 50 <-- receives OSC messages from the network \, at the
+multicast address and on the specified port;
+#X text 1239 93 <-- unpack OSC messages;
+#X text 1308 121 <-- route the OSC message to this address;
+#X text 1190 146 <-- put the message into a list;
+#X text 1387 189 <-- receives OSC messages from the network \, at the
+multicast address and on the specified port;
+#X text 1233 231 <-- unpack OSC messages;
+#X text 1320 260 <-- route the OSC message to this address;
+#X text 1184 286 <-- put the message into a list;
+#X msg 527 355 disconnect 239.255.255.250 3000;
+#X text 278 626 <-- Connect and generate a random ID number;
+#X text 315 659 <-- generate a random ID number;
+#X text 308 689 <-- store random ID number;
+#X text 396 711 <-- connect to OSC server;
+#X text 496 744 <-- presents musical thing to the network;
+#X text 1137 675 <-- random ID number;
+#X text 254 822 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/IP_connection/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X msg 251 775 send /input/\$1/192.168.0.10/0/audio/44100/16bits/2/224.0.0.0/55023/ON_CLI/55024/OFF_CLI/40000/Volume/40020/ON/40021/OFF/UDP/OSC/GuitarXBass
+, f 80;
+#X connect 0 0 2 0;
+#X connect 2 0 15 0;
+#X connect 3 0 31 0;
+#X connect 4 0 14 0;
+#X connect 5 0 3 0;
+#X connect 6 0 30 0;
+#X connect 7 0 76 0;
+#X connect 8 0 6 0;
+#X connect 9 0 15 0;
+#X connect 10 0 12 0;
+#X connect 11 0 10 0;
+#X connect 12 0 9 0;
+#X connect 14 0 15 0;
+#X connect 15 0 1 0;
+#X connect 30 0 7 0;
+#X connect 31 0 4 0;
+#X connect 35 0 36 0;
+#X connect 36 0 38 0;
+#X connect 37 0 54 0;
+#X connect 37 1 84 0;
+#X connect 37 2 51 0;
+#X connect 42 0 36 0;
+#X connect 43 0 36 0;
+#X connect 44 0 51 0;
+#X connect 44 0 84 0;
+#X connect 44 0 54 0;
+#X connect 44 0 55 0;
+#X connect 45 0 56 0;
+#X connect 46 0 42 0;
+#X connect 46 0 44 0;
+#X connect 51 0 43 0;
+#X connect 54 0 43 0;
+#X connect 56 0 57 0;
+#X connect 57 0 43 0;
+#X connect 57 0 35 0;
+#X connect 58 0 37 0;
+#X connect 60 0 61 0;
+#X connect 61 0 62 0;
+#X connect 62 0 14 0;
+#X connect 63 0 65 0;
+#X connect 64 0 76 0;
+#X connect 65 0 64 0;
+#X connect 66 0 60 0;
+#X connect 67 0 63 0;
+#X connect 76 0 15 0;
+#X connect 84 0 43 0;

@@ -1,0 +1,112 @@
+#N canvas 0 182 1920 987 10;
+#X obj 123 123 hsl 128 15 0 127 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 0 1;
+#X obj 120 209 osc/packOSC;
+#X obj 54 252 mrpeach/net/udpsend;
+#X msg 120 180 send /volume \$1;
+#X text 236 56 <-- connect to multicast address;
+#X text 242 92 <-- close connection;
+#X text 255 120 <-- volume vslider (0 - 127);
+#X text 217 179 <-- send message to volume;
+#X text 195 209 <-- pack message on OSC format;
+#X text 172 253 <-- send OSC message to network;
+#X msg 54 56 connect 224.0.0.251 40000;
+#X text 1278 19 MANAGEMENT LAYER;
+#X msg 1178 682 disconnect;
+#X obj 1157 751 mrpeach/udpsend;
+#X obj 1155 845 t b b b;
+#X obj 1157 792 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1187 795 <-- connection status;
+#X text 1255 713 <-- pack messages on OSC format;
+#X text 1260 750 <-- send messages via network;
+#X msg 1160 151 connect 224.0.0.1 60000;
+#X obj 1159 713 mrpeach/packOSC;
+#X obj 1160 99 random 101;
+#X obj 1178 561 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 1160 62 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 1562 268 <-- INPUT message;
+#X text 1538 399 <-- OUTPUT message;
+#X text 1204 564 <-- disconnect;
+#X text 1488 611 <-- GOODBYE message;
+#X msg 1161 188 send /hello/\$1/192.168.0.10/VideoControl;
+#X text 1192 440 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 1441 204 Standard HELLO message: /hello/id/ip/human_name;
+#X msg 1167 386 send /output/\$1/192.168.0.10/1/controller/40100/ON/40101/OFF/OSCmessage/Video_sender
+;
+#X obj 1163 127 value id23;
+#X obj 1178 585 value id23;
+#X obj 1155 886 route /hello /input /output /goodbye;
+#X msg 1178 610 /goodbye/\$1/192.168.0.10/VideoControl/disconnected
+;
+#X text 1185 635 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X text 1190 64 <-- Connect and generates random ID number;
+#X text 1233 97 <-- generates random ID number;
+#X text 1238 126 <-- store random ID number;
+#X text 1309 151 <-- connect to OSC server;
+#X text 1414 186 <-- presents musical thing in the network;
+#X text 1252 583 <-- random ID number;
+#X obj 445 420 osc/unpackOSC;
+#X obj 445 447 osc/routeOSC /connection;
+#X obj 445 473 list;
+#X text 47 377 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 270 417 unpack OSC messages -->;
+#X text 150 446 route the OSC message to this address -->;
+#X text 222 471 put the message into a list -->;
+#X obj 443 566 osc/unpackOSC;
+#X obj 443 619 list;
+#X text 44 525 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 275 566 unpack OSC messages -->;
+#X text 151 593 route the OSC message to this address -->;
+#X text 216 617 put the message into a list -->;
+#X obj 443 593 osc/routeOSC /disconnection;
+#X obj 445 379 mrpeach/net/udpreceive 224.0.0.0 55053;
+#X obj 443 524 mrpeach/net/udpreceive 224.0.0.0 55054;
+#X floatatom 54 283 5 0 1 0 - - -;
+#X text 96 283 <-- connection status;
+#X msg 63 93 disconnect 224.0.0.251 40000;
+#X text 1177 303 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/IP_connection/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X msg 1162 255 send /input/\$1/192.168.0.10/0/controller/0/1/224.0.0.0/55053/ON_CLI/55054/OFF_CLI/UDP/OSC/VideoControl
+, f 65;
+#X connect 0 0 3 0;
+#X connect 1 0 2 0;
+#X connect 2 0 59 0;
+#X connect 3 0 1 0;
+#X connect 10 0 2 0;
+#X connect 12 0 13 0;
+#X connect 13 0 15 0;
+#X connect 14 0 31 0;
+#X connect 14 1 63 0;
+#X connect 14 2 28 0;
+#X connect 19 0 13 0;
+#X connect 20 0 13 0;
+#X connect 21 0 28 0;
+#X connect 21 0 63 0;
+#X connect 21 0 31 0;
+#X connect 21 0 32 0;
+#X connect 22 0 33 0;
+#X connect 23 0 19 0;
+#X connect 23 0 21 0;
+#X connect 28 0 20 0;
+#X connect 31 0 20 0;
+#X connect 33 0 35 0;
+#X connect 34 0 14 0;
+#X connect 35 0 20 0;
+#X connect 35 0 12 0;
+#X connect 43 0 44 0;
+#X connect 44 0 45 0;
+#X connect 45 0 10 0;
+#X connect 50 0 56 0;
+#X connect 51 0 61 0;
+#X connect 56 0 51 0;
+#X connect 57 0 43 0;
+#X connect 58 0 50 0;
+#X connect 61 0 2 0;
+#X connect 63 0 20 0;
