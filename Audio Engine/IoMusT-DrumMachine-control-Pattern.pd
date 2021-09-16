@@ -1,0 +1,114 @@
+#N canvas 0 182 1920 987 12;
+#X msg 1156 645 disconnect;
+#X obj 1119 725 mrpeach/udpsend;
+#X obj 1117 819 t b b b;
+#X obj 1119 766 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1150 769 <-- connection status;
+#X text 1232 688 <-- pack messages on OSC format;
+#X text 1233 724 <-- send messages via network;
+#X msg 1122 125 connect 224.0.0.1 60000;
+#X obj 1121 687 mrpeach/packOSC;
+#X obj 1122 73 random 101;
+#X obj 1156 524 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 1122 36 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 1649 221 <-- INPUT message;
+#X text 1560 366 <-- OUTPUT message;
+#X text 1182 527 <-- disconnect;
+#X text 1584 578 <-- GOODBYE message;
+#X obj 110 218 packOSC;
+#X msg 110 193 send /drum \$1;
+#X msg 110 145 2 2 2 2 0 5 4 2 2;
+#X obj 110 171 list;
+#X text 222 31 <-- connect to multicast address;
+#X text 243 64 <-- close connection;
+#X text 241 144 <-- drum pattern (can be edit);
+#X text 168 219 <-- pack message on OSC format;
+#X text 208 193 <-- send message;
+#X obj 53 255 mrpeach/net/udpsend;
+#X text 193 256 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X text 146 170 <-- put drum pattern into a list;
+#X msg 1123 162 send /hello/\$1/192.168.0.10/DrumMachinePattern;
+#X text 1134 404 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 1487 174 Standard HELLO message: /hello/id/ip/human_name;
+#X msg 1129 351 send /output/\$1/192.168.0.10/0/100/controller/40013/Pattern/OSC/DrumMachine
+;
+#X obj 1117 860 route /hello /input /output /goodbye;
+#X obj 1124 101 value id12;
+#X obj 1156 548 value id12;
+#X msg 1156 573 /goodbye/\$1/192.168.0.10/DrumMachine_control_Pattern/disconnected
+;
+#X text 1160 608 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X obj 458 388 osc/unpackOSC;
+#X obj 458 415 osc/routeOSC /connection;
+#X obj 458 441 list;
+#X text 56 342 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 290 387 unpack OSC messages -->;
+#X text 166 416 route the OSC message to this address -->;
+#X text 235 440 put the message into a list -->;
+#X obj 456 534 osc/unpackOSC;
+#X obj 456 587 list;
+#X text 54 488 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 288 533 unpack OSC messages -->;
+#X text 164 562 route the OSC message to this address -->;
+#X text 233 586 put the message into a list -->;
+#X obj 456 561 osc/routeOSC /disconnection;
+#X floatatom 53 287 5 0 1 0 - - -;
+#X text 91 288 <-- connection status;
+#X obj 458 347 mrpeach/net/udpreceive 224.0.0.0 55021;
+#X obj 456 492 mrpeach/net/udpreceive 224.0.0.0 55022;
+#X text 1152 38 <-- Connect and generate random ID number;
+#X text 1199 73 <-- generates random ID number between 0 - 100;
+#X text 1200 99 <-- store random number;
+#X text 1292 124 <-- connect to OSC server;
+#X text 1458 156 <-- presents the musical thing on the network;
+#X text 1233 548 <-- random ID number;
+#X text 1139 261 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/IP_connection/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X msg 1128 208 send /input/\$1/192.168.0.10/0/controller/0/100/224.0.0.0/55021/ON_CLI/55022/OFF_CLI/UDP/OSC/DrumMachinePattern
+, f 73;
+#X msg 53 32 connect 224.0.0.0 40013;
+#X msg 53 64 disconnect 224.0.0.0 40013;
+#X connect 0 0 1 0;
+#X connect 1 0 3 0;
+#X connect 2 0 31 0;
+#X connect 2 1 62 0;
+#X connect 2 2 28 0;
+#X connect 7 0 1 0;
+#X connect 8 0 1 0;
+#X connect 9 0 28 0;
+#X connect 9 0 62 0;
+#X connect 9 0 31 0;
+#X connect 9 0 33 0;
+#X connect 10 0 34 0;
+#X connect 11 0 7 0;
+#X connect 11 0 9 0;
+#X connect 16 0 25 0;
+#X connect 17 0 16 0;
+#X connect 18 0 19 0;
+#X connect 19 0 17 0;
+#X connect 25 0 51 0;
+#X connect 28 0 8 0;
+#X connect 31 0 8 0;
+#X connect 32 0 2 0;
+#X connect 34 0 35 0;
+#X connect 35 0 8 0;
+#X connect 35 0 0 0;
+#X connect 37 0 38 0;
+#X connect 38 0 39 0;
+#X connect 39 0 63 0;
+#X connect 44 0 50 0;
+#X connect 45 0 64 0;
+#X connect 50 0 45 0;
+#X connect 53 0 37 0;
+#X connect 54 0 44 0;
+#X connect 62 0 8 0;
+#X connect 63 0 25 0;
+#X connect 64 0 25 0;
