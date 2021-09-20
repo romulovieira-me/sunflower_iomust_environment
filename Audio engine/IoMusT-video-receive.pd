@@ -1,0 +1,128 @@
+#N canvas 1920 376 1366 704 12;
+#X obj 138 94 gemhead;
+#X msg 138 138 dialog;
+#X obj 138 544 pix_texture;
+#X obj 138 591 rectangle 4 3;
+#X obj 138 39 netreceive 3500;
+#X text 247 38 <-- receive video data from network;
+#X text 194 95 <-- Read video data;
+#X text 188 138 <-- indicates video device;
+#X text 222 544 <-- video output;
+#X text 239 592 <-- screen size;
+#X text 1557 291 <-- INPUT message;
+#X text 1528 437 <-- OUTPUT message;
+#X text 1468 644 <-- GOODBYE message;
+#X text 1415 240 Standard HELLO message: /hello/id/ip/human_name;
+#X text 1385 222 <-- presents musical thing in the network;
+#X text 1024 16 MANAGEMENT LAYER;
+#X msg 929 743 disconnect;
+#X obj 908 812 mrpeach/udpsend;
+#X obj 906 906 t b b b;
+#X obj 908 853 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1 0
+1;
+#X text 939 856 <-- connection status;
+#X text 1023 772 <-- pack messages on OSC format;
+#X text 1023 813 <-- send messages via network;
+#X msg 906 148 connect 224.0.0.1 60000;
+#X obj 910 774 mrpeach/packOSC;
+#X obj 906 96 random 101;
+#X obj 929 622 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 906 59 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 1371 271 <-- INPUT message;
+#X text 1346 464 <-- OUTPUT message;
+#X text 955 625 <-- disconnect;
+#X text 1288 671 <-- GOODBYE message;
+#X text 943 501 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 932 324 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X text 1225 197 Standard HELLO message: /hello/id/ip/human_name;
+#X obj 909 124 value id23;
+#X obj 929 646 value id23;
+#X obj 906 947 route /hello /input /output /goodbye;
+#X text 936 696 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X text 936 61 <-- Connect and generates random ID number;
+#X text 979 94 <-- generates random ID number;
+#X text 984 123 <-- store random ID number;
+#X text 1076 147 <-- connect to OSC server;
+#X text 1203 180 <-- presents musical thing in the network;
+#X text 1003 644 <-- random ID number;
+#X msg 907 185 send /hello/\$1/192.168.0.10/VideoReceive;
+#X msg 918 447 send /output/\$1/192.168.0.10/1/controller/40100/ON/40101/OFF/OSCmessage/VideoReceive
+;
+#X msg 929 671 /goodbye/\$1/192.168.0.10/VideoReceive/disconnected
+;
+#X msg 908 252 send /input/\$1/192.168.0.10/0/3500/3600/OPEN_SUBPATCH_VIDEO_RECEIVE2/3601/CLOSE_SUBPATCH_VIDEO_RECEIVE2/controller/0/1/UDP/OSC/VideoControl/VideoSender
+, f 65;
+#X obj 138 384 pix_video;
+#X obj 138 417 alpha;
+#X obj 138 453 colorRGB;
+#X obj 138 486 pix_texture;
+#X obj 138 516 square 3;
+#X floatatom 279 332 5 0 255 0 - - -;
+#X floatatom 422 323 5 0 255 0 - - -;
+#X floatatom 568 320 5 0 255 0 - - -;
+#X floatatom 715 317 5 0 255 0 - - -;
+#X obj 282 293 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
+-1 -1 12700 1;
+#X obj 425 292 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 12700 1;
+#X obj 571 291 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4160
+-1 -1 0 1;
+#X obj 718 290 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -191407
+-1 -1 0 1;
+#X text 755 317 alpha;
+#X text 320 332 RED;
+#X text 462 324 GREEN;
+#X text 608 320 BLUE;
+#X obj 280 221 osc/unpackOSC;
+#X obj 280 251 osc/routeOSC /video_red /video_green /video_blue /video_alpha
+, f 62;
+#X obj 280 190 mrpeach/net/udpreceive 40133;
+#X connect 0 0 49 0;
+#X connect 1 0 49 0;
+#X connect 2 0 3 0;
+#X connect 4 0 0 0;
+#X connect 16 0 17 0;
+#X connect 17 0 19 0;
+#X connect 18 0 46 0;
+#X connect 18 1 48 0;
+#X connect 18 2 45 0;
+#X connect 23 0 17 0;
+#X connect 24 0 17 0;
+#X connect 25 0 45 0;
+#X connect 25 0 48 0;
+#X connect 25 0 46 0;
+#X connect 25 0 35 0;
+#X connect 26 0 36 0;
+#X connect 27 0 23 0;
+#X connect 27 0 25 0;
+#X connect 36 0 47 0;
+#X connect 37 0 18 0;
+#X connect 45 0 24 0;
+#X connect 46 0 24 0;
+#X connect 47 0 24 0;
+#X connect 47 0 16 0;
+#X connect 48 0 24 0;
+#X connect 49 0 50 0;
+#X connect 50 0 51 0;
+#X connect 51 0 52 0;
+#X connect 52 0 53 0;
+#X connect 53 0 2 0;
+#X connect 54 0 51 1;
+#X connect 55 0 51 2;
+#X connect 56 0 51 3;
+#X connect 57 0 51 4;
+#X connect 58 0 54 0;
+#X connect 59 0 55 0;
+#X connect 60 0 56 0;
+#X connect 61 0 57 0;
+#X connect 66 0 67 0;
+#X connect 67 0 58 0;
+#X connect 67 1 59 0;
+#X connect 67 2 60 0;
+#X connect 67 3 61 0;
+#X connect 68 0 66 0;
