@@ -1,0 +1,278 @@
+#N canvas 0 182 1920 987 10;
+#X obj 138 210 osc/packOSC;
+#X obj 72 253 mrpeach/net/udpsend;
+#X obj 138 137 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 709 202 osc/packOSC;
+#X obj 643 245 mrpeach/net/udpsend;
+#X obj 709 129 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X text 155 135 <-- ON;
+#X text 730 128 <-- OFF;
+#X msg 138 181 send /sound \$1;
+#X msg 709 173 send /sound \$1;
+#X text 217 55 <-- connect to multicast address;
+#X text 243 95 <-- close connection;
+#X text 236 180 <-- prepare OSC message;
+#X text 213 210 <-- convert Pure Data to OSC;
+#X text 199 250 <-- send data via network \, in UDP packet \, using
+mrpeach library;
+#X text 787 42 <-- connect to multicast addres;
+#X text 812 66 <-- close connection;
+#X text 797 172 <-- prepare OSC message;
+#X text 783 202 <-- convert Pure Data to OSC;
+#X text 765 245 <-- send data via network \, in UDP packet \, using
+mrpeach library;
+#X text 1302 10 MANAGEMENT LAYER;
+#X msg 1229 662 disconnect;
+#X obj 1181 742 mrpeach/udpsend;
+#X obj 1179 836 t b b b;
+#X obj 1181 783 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1212 786 <-- connection status;
+#X text 1282 705 <-- pack messages on OSC format;
+#X text 1280 741 <-- send messages via network;
+#X msg 1184 142 connect 224.0.0.1 60000;
+#X obj 1183 704 mrpeach/packOSC;
+#X obj 1184 90 random 101;
+#X obj 1229 541 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 1184 53 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 1656 253 <-- INPUT message;
+#X text 1556 440 <-- OUTPUT message;
+#X text 1255 544 <-- disconnect;
+#X text 1597 596 <-- GOODBYE message;
+#X msg 1185 179 send /hello/\$1/192.168.0.10/GuitarXBassControl;
+#X text 1206 480 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 1492 192 Standard HELLO message: /hello/id/ip/human_name;
+#X obj 1186 118 value id13;
+#X obj 1229 565 value id13;
+#X obj 1179 877 route /hello /input /output /goodbye;
+#X msg 1229 590 /goodbye/\$1/192.168.0.10/GuitarXBassRaw_control_OnOff/disconnected
+;
+#X text 1231 621 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X obj 421 444 osc/unpackOSC;
+#X obj 421 471 osc/routeOSC /connection;
+#X obj 421 497 list;
+#X text 59 399 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 272 441 unpack OSC messages -->;
+#X text 166 471 route the OSC message to this address -->;
+#X text 225 497 put the message into a list -->;
+#X obj 419 590 osc/unpackOSC;
+#X obj 419 643 list;
+#X text 74 549 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 269 590 unpack OSC messages -->;
+#X text 162 617 route the OSC message to this address -->;
+#X text 221 643 put the message into a list -->;
+#X obj 419 617 osc/routeOSC /disconnection;
+#X obj 409 747 osc/unpackOSC;
+#X obj 409 774 osc/routeOSC /connection;
+#X obj 409 800 list;
+#X text 62 705 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 263 746 unpack OSC messages -->;
+#X text 156 771 route the OSC message to this address -->;
+#X text 213 800 put the message into a list -->;
+#X obj 407 893 osc/unpackOSC;
+#X obj 407 946 list;
+#X text 64 850 receives OSC messages from the network \, at the multicast
+address and on the specified port -->;
+#X text 261 892 unpack OSC messages -->;
+#X text 152 919 route the OSC message to this address -->;
+#X text 212 943 put the message into a list -->;
+#X obj 407 920 osc/routeOSC /disconnection;
+#X obj 421 403 mrpeach/net/udpreceive 224.0.0.0 55025;
+#X obj 409 706 mrpeach/net/udpreceive 224.0.0.0 55026;
+#X obj 419 548 mrpeach/net/udpreceive 224.0.0.0 55027;
+#X obj 407 851 mrpeach/net/udpreceive 224.0.0.0 55028;
+#X floatatom 72 292 5 0 1 0 - - -;
+#X text 109 291 <-- connection status;
+#X floatatom 643 294 5 0 1 0 - - -;
+#X text 680 295 <-- connection status;
+#X text 1295 564 <-- random ID number;
+#X text 1214 55 <-- Connect and generates random ID number;
+#X text 1251 88 <-- generate random ID number;
+#X text 1250 118 <-- store random ID number;
+#X text 1332 140 <-- connect to OSC server;
+#X text 1468 178 <-- presents musical things to the network;
+#X text 1202 304 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/IP_connection/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X obj 461 1258 osc/packOSC;
+#X obj 394 1300 mrpeach/net/udpsend;
+#X obj 461 1185 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0
+1;
+#X text 541 1104 <-- connect to multicast address;
+#X text 561 1139 <-- close connection;
+#X text 560 1227 <-- prepare to send message;
+#X text 536 1258 <-- pack message in a OSC format;
+#X text 517 1303 <-- send OSC packet via network \, using mrpeach library
+;
+#X floatatom 394 1337 5 0 1 0 - - -;
+#X text 436 1338 <-- connection status;
+#X obj 1217 1240 osc/packOSC;
+#X obj 1151 1283 mrpeach/net/udpsend;
+#X obj 1217 1167 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1
+0 1;
+#X text 1294 1082 <-- connect to multicast address;
+#X text 1318 1114 <-- close connection;
+#X text 1314 1209 <-- prepare to send message;
+#X text 1289 1242 <-- pack message in a OSC format;
+#X text 1273 1284 <-- send OSC packet via network \, using mrpeach
+library;
+#X floatatom 1151 1313 5 0 1 0 - - -;
+#X text 1191 1317 <-- connection status;
+#X obj 393 1500 osc/unpackOSC;
+#X obj 393 1527 osc/routeOSC /connection;
+#X obj 392 1553 list;
+#X obj 391 1646 osc/unpackOSC;
+#X obj 391 1699 list;
+#X obj 391 1673 osc/routeOSC /disconnection;
+#X obj 1150 1482 osc/unpackOSC;
+#X obj 1150 1509 osc/routeOSC /connection;
+#X obj 1149 1536 list;
+#X obj 1148 1628 osc/unpackOSC;
+#X obj 1148 1685 list;
+#X obj 1148 1655 osc/routeOSC /disconnection;
+#X text 478 1183 <-- OPEN - SUBPATCH [guitar2];
+#X text 1238 1166 <-- CLOSE - SUBPATCH [guitar2];
+#X msg 461 1229 send /sound \$1;
+#X msg 1217 1211 send /sound \$1;
+#X msg 395 1105 connect 224.0.0.0 46530;
+#X msg 395 1138 disconnect 224.0.0.0 46530;
+#X msg 1151 1082 connect 224.0.0.0 46531;
+#X msg 1151 1113 disconnect 224.0.0.0 46531;
+#X obj 393 1459 mrpeach/net/udpreceive 224.0.0.0 56635;
+#X obj 391 1604 mrpeach/net/udpreceive 224.0.0.0 56639;
+#X obj 1150 1441 mrpeach/net/udpreceive 224.0.0.0 56637;
+#X obj 1148 1586 mrpeach/net/udpreceive 224.0.0.0 56640;
+#X msg 1190 230 send /input/\$1/192.168.0.10/0/controller/0/1/224.0.0.0/55025/ON_CONTROL_CLI/55026/ON_CONTROL1_CLI/55027/OFF_CONTROL_CLI/55028/OFF_CONTROL1_CLI/56635/CONNECT_OPEN_SUBPATCH/56637/CONNECT_CLOSE_SUBPATCH/56639/DISCONNECT_OPEN/SUBPATCH/56640/DISCONNECT_CLOSE_SUBPATCH/UDP/OSC/GuitarXBassControlOnOff
+, f 76;
+#X msg 70 57 connect 224.0.0.0 40020;
+#X msg 81 94 disconnect 224.0.0.0 40020;
+#X msg 643 44 connect 224.0.0.0 40021;
+#X msg 651 68 disconnect 224.0.0.0 40021;
+#X msg 1190 428 send /output/\$1/192.168.0.10/1/controller/40020/ON/40021/OFF/46530/OPEN_SUBPATCH/46531/CLOSE_SUBPATCH/OSC/GuitarXBassControl
+;
+#X text 506 443 <-- unpack OSC messages;
+#X text 574 470 <-- route the OSC message to this address;
+#X text 454 496 <-- put the message into a list (allows connection
+using CLI);
+#X text 655 401 <-- receive OSC messages to network;
+#X text 503 589 <-- unpack OSC messages;
+#X text 593 615 <-- route the OSC message to this address;
+#X text 449 642 <-- put the message into a list (allows connection
+using CLI);
+#X text 654 548 <-- receive OSC messages to network;
+#X text 494 747 <-- unpack OSC messages;
+#X text 558 774 <-- route the OSC message to this address;
+#X text 440 799 <-- put the message into a list (allows connection
+using CLI);
+#X text 643 707 <-- receive OSC messages to network;
+#X text 491 893 <-- unpack OSC messages;
+#X text 581 919 <-- route the OSC message to this address;
+#X text 437 946 <-- put the message into a list (allows connection
+using CLI);
+#X text 640 851 <-- receive OSC messages to network;
+#X text 845 1030 - SUBPATCH control;
+#X text 478 1500 <-- unpack OSC messages;
+#X text 546 1526 <-- route the OSC message to this address;
+#X text 422 1551 <-- put the message into a list (allows connection
+using CLI);
+#X text 628 1458 <-- receive OSC messages to network;
+#X text 475 1646 <-- unpack OSC messages;
+#X text 560 1671 <-- route the OSC message to this address;
+#X text 424 1697 <-- put the message into a list (allows connection
+using CLI);
+#X text 625 1604 <-- receive OSC messages to network;
+#X text 1236 1482 <-- unpack OSC messages;
+#X text 1300 1509 <-- route the OSC message to this address;
+#X text 1180 1535 <-- put the message into a list (allows connection
+using CLI);
+#X text 1386 1440 <-- receive OSC messages to network;
+#X text 1233 1627 <-- unpack OSC messages;
+#X text 1325 1656 <-- route the OSC message to this address;
+#X text 1181 1683 <-- put the message into a list (allows connection
+using CLI);
+#X text 1384 1587 <-- receive OSC messages to network;
+#X connect 0 0 1 0;
+#X connect 1 0 77 0;
+#X connect 2 0 8 0;
+#X connect 3 0 4 0;
+#X connect 4 0 79 0;
+#X connect 5 0 9 0;
+#X connect 8 0 0 0;
+#X connect 9 0 3 0;
+#X connect 21 0 22 0;
+#X connect 22 0 24 0;
+#X connect 23 0 137 0;
+#X connect 23 1 132 0;
+#X connect 23 2 37 0;
+#X connect 28 0 22 0;
+#X connect 29 0 22 0;
+#X connect 30 0 37 0;
+#X connect 30 0 132 0;
+#X connect 30 0 137 0;
+#X connect 30 0 40 0;
+#X connect 31 0 41 0;
+#X connect 32 0 28 0;
+#X connect 32 0 30 0;
+#X connect 37 0 29 0;
+#X connect 41 0 43 0;
+#X connect 42 0 23 0;
+#X connect 43 0 29 0;
+#X connect 43 0 21 0;
+#X connect 45 0 46 0;
+#X connect 46 0 47 0;
+#X connect 47 0 133 0;
+#X connect 52 0 58 0;
+#X connect 53 0 134 0;
+#X connect 58 0 53 0;
+#X connect 59 0 60 0;
+#X connect 60 0 61 0;
+#X connect 61 0 135 0;
+#X connect 66 0 72 0;
+#X connect 67 0 136 0;
+#X connect 72 0 67 0;
+#X connect 73 0 45 0;
+#X connect 74 0 59 0;
+#X connect 75 0 52 0;
+#X connect 76 0 66 0;
+#X connect 88 0 89 0;
+#X connect 89 0 96 0;
+#X connect 90 0 122 0;
+#X connect 98 0 99 0;
+#X connect 99 0 106 0;
+#X connect 100 0 123 0;
+#X connect 108 0 109 0;
+#X connect 109 0 110 0;
+#X connect 110 0 124 0;
+#X connect 111 0 113 0;
+#X connect 112 0 125 0;
+#X connect 113 0 112 0;
+#X connect 114 0 115 0;
+#X connect 115 0 116 0;
+#X connect 116 0 126 0;
+#X connect 117 0 119 0;
+#X connect 118 0 127 0;
+#X connect 119 0 118 0;
+#X connect 122 0 88 0;
+#X connect 123 0 98 0;
+#X connect 124 0 89 0;
+#X connect 125 0 89 0;
+#X connect 126 0 99 0;
+#X connect 127 0 99 0;
+#X connect 128 0 108 0;
+#X connect 129 0 111 0;
+#X connect 130 0 114 0;
+#X connect 131 0 117 0;
+#X connect 132 0 29 0;
+#X connect 133 0 1 0;
+#X connect 134 0 1 0;
+#X connect 135 0 4 0;
+#X connect 136 0 4 0;
+#X connect 137 0 29 0;

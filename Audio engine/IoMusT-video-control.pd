@@ -1,0 +1,192 @@
+#N canvas 379 308 1366 704 12;
+#X obj 94 207 osc/packOSC;
+#X obj 28 250 mrpeach/net/udpsend;
+#X obj 94 123 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X text 209 54 <-- connect to multicast address;
+#X text 243 91 <-- close connection;
+#X text 276 177 <-- prepare OSC message;
+#X text 181 208 <-- convert Pure Data message to OSC;
+#X text 173 251 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X obj 716 218 osc/packOSC;
+#X obj 650 261 mrpeach/net/udpsend;
+#X obj 716 134 tgl 15 0 empty empty empty 17 7 0 10 -258113 -1 -1 0
+1;
+#X text 832 63 <-- connect to multicast address;
+#X text 866 103 <-- close connection;
+#X text 905 189 <-- prepare OSC message;
+#X text 803 219 <-- convert Pure Data message to OSC;
+#X text 795 262 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X msg 94 178 send /video_control_on \$1;
+#X msg 716 189 send /video_control_off \$1;
+#X msg 650 64 connect 224.0.0.251 40101;
+#X text 1362 23 MANAGEMENT LAYER;
+#X msg 1275 882 disconnect;
+#X obj 1254 951 mrpeach/udpsend;
+#X obj 1252 1045 t b b b;
+#X obj 1254 992 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1285 995 <-- connection status;
+#X text 1369 911 <-- pack messages on OSC format;
+#X text 1369 952 <-- send messages via network;
+#X msg 1244 155 connect 224.0.0.1 60000;
+#X obj 1256 913 mrpeach/packOSC;
+#X obj 1244 103 random 101;
+#X obj 1275 761 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 1244 66 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 1711 273 <-- INPUT message;
+#X text 1692 634 <-- OUTPUT message;
+#X text 1301 764 <-- disconnect;
+#X text 1632 810 <-- GOODBYE message;
+#X msg 1245 192 send /hello/\$1/192.168.0.10/VideoControl;
+#X text 1268 686 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 1566 210 Standard HELLO message: /hello/id/ip/human_name;
+#X obj 1247 131 value id23;
+#X obj 1275 785 value id23;
+#X obj 1252 1086 route /hello /input /output /goodbye;
+#X msg 1275 810 /goodbye/\$1/192.168.0.10/VideoControl/disconnected
+;
+#X text 1282 835 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X floatatom 28 292 5 0 1 0 - - -;
+#X text 70 292 <-- connection status;
+#X floatatom 650 295 5 0 1 0 - - -;
+#X text 699 296 <-- connection status;
+#X obj 28 388 osc/unpackOSC;
+#X obj 28 415 osc/routeOSC /connection;
+#X obj 28 441 list;
+#X obj 647 383 osc/unpackOSC;
+#X obj 647 448 list;
+#X msg 659 102 disconnect 224.0.0.251 40101;
+#X obj 28 347 mrpeach/net/udpreceive 224.0.0.0 55047;
+#X obj 647 341 mrpeach/net/udpreceive 224.0.0.0 55048;
+#X text 1274 68 <-- Connect and generates random ID number;
+#X text 1317 101 <-- generates random ID number;
+#X text 1322 130 <-- store random ID number;
+#X text 1414 154 <-- connect to OSC server;
+#X text 1536 192 <-- presents musical thing in the network;
+#X text 1349 783 <-- random ID number;
+#X text 1274 474 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/IP_connection/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X text 109 120 <-- START video recording;
+#X text 731 131 <-- STOP video recording;
+#X obj 26 536 osc/unpackOSC;
+#X obj 26 563 osc/routeOSC /connection;
+#X obj 26 589 list;
+#X obj 644 532 osc/unpackOSC;
+#X obj 644 585 list;
+#X obj 644 559 osc/routeOSC /disconnection;
+#X obj 26 495 mrpeach/net/udpreceive 224.0.0.0 43021;
+#X obj 644 490 mrpeach/net/udpreceive 224.0.0.0 43022;
+#X obj 98 811 osc/packOSC;
+#X obj 32 854 mrpeach/net/udpsend;
+#X text 249 657 <-- connect to multicast address;
+#X text 268 689 <-- close connection;
+#X text 185 812 <-- convert Pure Data message to OSC;
+#X text 177 855 <-- send OSC data packaged in UDP \, using the mrpeach
+library;
+#X floatatom 32 896 5 0 1 0 - - -;
+#X text 74 896 <-- connection status;
+#X obj 32 992 osc/unpackOSC;
+#X obj 32 1019 osc/routeOSC /connection;
+#X obj 32 1045 list;
+#X obj 30 1140 osc/unpackOSC;
+#X obj 30 1167 osc/routeOSC /connection;
+#X obj 30 1193 list;
+#X obj 101 753 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
+-1 -1 0 1;
+#X obj 347 751 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 0 1;
+#X obj 538 751 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4160
+-1 -1 0 1;
+#X obj 789 749 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -228856
+-1 -1 0 1;
+#X msg 98 782 send /video_red \$1;
+#X msg 344 780 send /video_green \$1;
+#X msg 535 780 send /video_blue \$1;
+#X msg 786 778 send /video_alpha \$1;
+#X obj 32 951 mrpeach/net/udpreceive 224.0.0.0 55347;
+#X obj 30 1099 mrpeach/net/udpreceive 224.0.0.0 55348;
+#X msg 1261 607 send /output/\$1/192.168.0.10/1/controller/3600/OPEN_SUBPATCH_VIDEO_RECEIVE2/3601/CLOSE_SUBPATCH_VIDEO_RECEIVE2/40100/START/40101/STOP/40150/ON/40151/OFF/OSCmessage/Video_sender
+;
+#X msg 1246 259 send /input/\$1/192.168.0.10/0/controller/0/1/224.0.0.0/3666/CONNECT_OPEN_SUBPATCH_VIDEO_RECEIVE2/3667/DISCONNECT_OPEN_SUBPATCH_VIDEO_RECEIVE2/3668/CONNECT_CLOSE_VIDEO_RECEIVE2/3669/DISCONNECT_CLOSE_VIDEO_RECEIVE2/43021/DISCONNECT_START_CLI/43022/DISCONNECT_STOP_CLI/3666/CONNECT_OPEN_SUBPATCH_VIDEO_RECEIVE2/3667/DISCONNECT_OPEN_SUBPATCH_VIDEO_RECEIVE2/3668/CONNECT_CLOSE_SUBPATCH_VIDEO_RECEIVE2/3669/DISCONNECT_CLOSE_SUBPATCH_VIDEO_RECEIVE2/25527/CONNECT_ON_CLI/25528/CONNECT_OFF_CLI/25529/DISCONNECT_ON_CLI/25530/DISCONNECT_OFF_CLI/40133/COLOR_CONTROL/55047/CONNECT_START_CLI/55048/CONNECT_STOP_CLI/55347/CONNECT_COLOR_CONTROL_CLI/55348/DISCONNECT_COLOR_CONTROL/UDP/OSC/VideoControl
+, f 65;
+#X msg 32 658 connect 255.255.255.255 40133;
+#X msg 32 691 disconnect 255.255.255.255 40133;
+#X obj 647 412 osc/routeOSC /connection;
+#X msg 28 54 connect 224.0.0.251 40100;
+#X msg 28 87 disconnect 224.0.0.251 40100;
+#X connect 0 0 1 0;
+#X connect 1 0 44 0;
+#X connect 2 0 16 0;
+#X connect 8 0 9 0;
+#X connect 9 0 46 0;
+#X connect 10 0 17 0;
+#X connect 16 0 0 0;
+#X connect 17 0 8 0;
+#X connect 18 0 9 0;
+#X connect 20 0 21 0;
+#X connect 21 0 23 0;
+#X connect 22 0 97 0;
+#X connect 22 1 98 0;
+#X connect 22 2 36 0;
+#X connect 27 0 21 0;
+#X connect 28 0 21 0;
+#X connect 29 0 36 0;
+#X connect 29 0 98 0;
+#X connect 29 0 97 0;
+#X connect 29 0 39 0;
+#X connect 30 0 40 0;
+#X connect 31 0 27 0;
+#X connect 31 0 29 0;
+#X connect 36 0 28 0;
+#X connect 40 0 42 0;
+#X connect 41 0 22 0;
+#X connect 42 0 28 0;
+#X connect 42 0 20 0;
+#X connect 48 0 49 0;
+#X connect 49 0 50 0;
+#X connect 50 0 102 0;
+#X connect 51 0 101 0;
+#X connect 52 0 18 0;
+#X connect 53 0 9 0;
+#X connect 54 0 48 0;
+#X connect 55 0 51 0;
+#X connect 65 0 66 0;
+#X connect 66 0 67 0;
+#X connect 67 0 103 0;
+#X connect 68 0 70 0;
+#X connect 69 0 53 0;
+#X connect 70 0 69 0;
+#X connect 71 0 65 0;
+#X connect 72 0 68 0;
+#X connect 73 0 74 0;
+#X connect 74 0 79 0;
+#X connect 81 0 82 0;
+#X connect 82 0 83 0;
+#X connect 83 0 99 0;
+#X connect 84 0 85 0;
+#X connect 85 0 86 0;
+#X connect 86 0 100 0;
+#X connect 87 0 91 0;
+#X connect 88 0 92 0;
+#X connect 89 0 93 0;
+#X connect 90 0 94 0;
+#X connect 91 0 73 0;
+#X connect 92 0 73 0;
+#X connect 93 0 73 0;
+#X connect 94 0 73 0;
+#X connect 95 0 81 0;
+#X connect 96 0 84 0;
+#X connect 97 0 28 0;
+#X connect 98 0 28 0;
+#X connect 99 0 74 0;
+#X connect 100 0 74 0;
+#X connect 101 0 52 0;
+#X connect 102 0 1 0;
+#X connect 103 0 1 0;
