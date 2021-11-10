@@ -1,0 +1,147 @@
+#N canvas 0 64 1920 987 12;
+#X obj 425 258 osc/packOSC;
+#X obj 358 305 mrpeach/net/udpsend;
+#X floatatom 425 197 5 0 255 0 - - -;
+#X text 602 118 <-- close connection;
+#X text 554 229 <-- prepare OSC message;
+#X text 510 260 <-- convert Pure Data message to OSC;
+#X floatatom 358 343 5 0 1 0 - - -;
+#X text 400 342 <-- connection status;
+#X obj 428 144 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4034
+-1 -1 0 1;
+#X obj 425 170 int;
+#X text 466 197 <-- Stars speed;
+#X text 572 79 <-- connect to this address;
+#X msg 358 79 connect 255.255.255.255 12000;
+#X msg 369 116 disconnect 255.255.255.255 12000;
+#X msg 1284 644 disconnect;
+#X obj 1244 720 mrpeach/udpsend;
+#X obj 1242 814 t b b b;
+#X obj 1244 761 tgl 25 0 empty empty empty 17 7 0 10 -228856 -1 -1
+0 1;
+#X text 1275 764 <-- connection status;
+#X text 1357 683 <-- pack messages on OSC format;
+#X text 1358 719 <-- send messages via network;
+#X msg 1247 120 connect 224.0.0.1 60000;
+#X obj 1246 682 mrpeach/packOSC;
+#X obj 1247 68 random 101;
+#X obj 1284 523 bng 18 250 50 0 empty empty empty 17 7 0 10 -258113
+-1 -1;
+#X obj 1247 31 bng 25 250 50 0 empty empty empty 17 7 0 10 -4034 -1
+-1;
+#X text 1750 222 <-- INPUT message;
+#X text 1681 384 <-- OUTPUT message;
+#X text 1310 526 <-- disconnect;
+#X text 1636 571 <-- GOODBYE message;
+#X text 1280 425 Standard OUTPUT message: /output/ID_number/IP_number/port_type_number/network_port_number/network_port_description/
+;
+#X text 1577 173 Standard HELLO message: /hello/id/ip/human_name;
+#X obj 1243 855 route /hello /input /output /goodbye;
+#X text 1291 605 Standard GOODBYE message: /goodbye/ID_number/IP_number/human_name/status
+;
+#X text 1277 33 <-- connect and generate a random ID number;
+#X text 1324 68 <-- generate a random ID number between 0 - 100;
+#X text 1328 95 <-- store random ID number;
+#X text 1418 119 <-- connect to OSC server;
+#X text 1550 156 <-- presents the musical thing to the network;
+#X text 1358 546 <-- random ID number;
+#X text 1269 261 Standard INPUT message: /input/ID_number/IP_number/port_type_number/musical_thing_type(audio)/sample_rate/bit_depth/audio_file_format/channel_number/IP_connection/port_number/port_description/network_protocol/music_protocol/human_name
+;
+#X obj 354 453 osc/unpackOSC;
+#X obj 354 480 osc/routeOSC /connection;
+#X obj 354 506 list;
+#X obj 351 588 osc/unpackOSC;
+#X obj 351 641 list;
+#X obj 351 615 osc/routeOSC /disconnection;
+#X text 453 452 <-- unpack OSC messages;
+#X obj 835 285 osc/packOSC;
+#X floatatom 835 224 5 0 255 0 - - -;
+#X text 961 238 <-- prepare OSC message;
+#X text 917 285 <-- convert Pure Data message to OSC;
+#X obj 838 171 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -4160
+-1 -1 0 1;
+#X obj 835 197 int;
+#X text 870 197 <-- Convert Vslider value to int;
+#X obj 49 285 osc/packOSC;
+#X floatatom 49 224 5 0 255 0 - - -;
+#X obj 52 171 hsl 128 15 0 255 0 0 empty empty empty -2 -8 0 10 -258113
+-1 -1 0 1;
+#X obj 49 198 int;
+#X text 84 197 <-- Convert Vslider value to int;
+#X msg 49 256 send /vermelho \$1;
+#X msg 425 229 send /verde \$1;
+#X msg 835 256 send /azul \$1;
+#X text 876 224 <-- Blue color control;
+#X text 460 170 <-- Green color control;
+#X text 90 224 <-- Red color control;
+#X obj 354 412 mrpeach/net/udpreceive 224.0.0.0 12489;
+#X obj 351 560 mrpeach/net/udpreceive 224.0.0.0 12490;
+#X msg 1250 205 send /input/\$1/192.168.0.10/0/controller/1/224.0.0.0/12489/ON/12490/OFF/UDP/OSC/VHS_Graphic
+, f 70;
+#X msg 1253 371 send /output/\$1/192.168.0.10/1/controller/0/500/225.255.255.255/12000/Color_control/UDP/OSC/VHS_Graphic
+;
+#X msg 1284 572 /goodbye/\$1/192.168.0.10/VHS_Graphic/disconnected
+;
+#X msg 1248 157 send /hello/\$1/192.168.0.10/VHS_Graphic;
+#X obj 1249 96 value id73;
+#X obj 1284 547 value id73;
+#X obj 1244 895 bng 22 250 50 0 empty empty empty 17 7 0 10 -159808
+-1 -1;
+#X text 1320 956 <-- same random number;
+#X text 1270 895 <-- mode;
+#X msg 1244 995 send /mode/\$1/192.168.0.10/Microphone/Performance_Mode
+;
+#X text 1290 1031 Standard MODE message: /mode/ID_number/IP_number/human_name/status
+;
+#X obj 1245 958 value id73;
+#X connect 0 0 1 0;
+#X connect 1 0 6 0;
+#X connect 2 0 61 0;
+#X connect 8 0 9 0;
+#X connect 9 0 2 0;
+#X connect 12 0 1 0;
+#X connect 13 0 1 0;
+#X connect 14 0 15 0;
+#X connect 15 0 17 0;
+#X connect 16 0 69 0;
+#X connect 16 0 77 0;
+#X connect 16 1 68 0;
+#X connect 16 2 71 0;
+#X connect 21 0 15 0;
+#X connect 22 0 15 0;
+#X connect 23 0 71 0;
+#X connect 23 0 68 0;
+#X connect 23 0 69 0;
+#X connect 23 0 72 0;
+#X connect 24 0 73 0;
+#X connect 25 0 21 0;
+#X connect 25 0 23 0;
+#X connect 32 0 16 0;
+#X connect 41 0 42 0;
+#X connect 42 0 43 0;
+#X connect 43 0 12 0;
+#X connect 44 0 46 0;
+#X connect 45 0 13 0;
+#X connect 46 0 45 0;
+#X connect 48 0 1 0;
+#X connect 49 0 62 0;
+#X connect 52 0 53 0;
+#X connect 53 0 49 0;
+#X connect 55 0 1 0;
+#X connect 56 0 60 0;
+#X connect 57 0 58 0;
+#X connect 58 0 56 0;
+#X connect 60 0 55 0;
+#X connect 61 0 0 0;
+#X connect 62 0 48 0;
+#X connect 66 0 41 0;
+#X connect 67 0 44 0;
+#X connect 68 0 22 0;
+#X connect 69 0 22 0;
+#X connect 70 0 22 0;
+#X connect 70 0 14 0;
+#X connect 71 0 22 0;
+#X connect 73 0 70 0;
+#X connect 74 0 79 0;
+#X connect 77 0 22 0;
+#X connect 79 0 77 0;
